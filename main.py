@@ -46,11 +46,20 @@ while True:
                       },
 
                       headers=headers)
+    
+    if r.status_code == 200:
+        status = "OK"
+    elif r.status_code == 429:
+        status ="TooManyRequests (хватит на сегодня)"
+    elif r.status_code == 405:
+        status = "MethodNotAllowed (Вас заметили)"
+    else:
+        status = "Undefined"
 
     i += 1
 
     # print("==============================================\n\n\n")
-    LogManager.info(f"{r} === {i}")
+    LogManager.info(f"{r} === {i} <<== ==>> {status}")
     # print("\n\n\n==============================================\n\n\n")
     # os.system("cls")
 
