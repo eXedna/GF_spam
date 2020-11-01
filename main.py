@@ -5,6 +5,7 @@ import random
 from LogPython import LogManager
 import requests
 LogManager = LogManager()
+import threading
 
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.80 Safari/537.36 Edg/86.0.622.43'
@@ -43,52 +44,56 @@ random_num = [1, 5]
 
 jojo = random.choice(random_num)
    
-i = 0                   
+def raid(a, b, c, d):
+    i = 0                   
+    while True:
+        r = requests.post("https://docs.google.com/forms/u/0/d/e/1FAIpQLSfSA182h4jGDBIOcfyMgxeorPUokkb26QS4KZtMpB5H6O3ZcA/formResponse",
+                        data={
+                            "entry.447101162": "9",
+                            "entry.1043893031": a,
+                            "entry.806414291": b,
+                            "entry.1293916860": c,
+                            "entry.635193400": d,
+                            "entry.1625556646": d,
+                            "entry.24742125": d,
+                            "entry.731997419": d,
+                            "entry.877852689": d,
+                            "entry.325369499": d,
+                            "entry.1508918824": d,
+                            "entry.1003945292": "5",
+                            "entry.635193400_sentinel": "",
+                            "entry.1625556646_sentinel": "",
+                            "entry.24742125_sentinel": "",
+                            "entry.731997419_sentinel": "",
+                            "entry.877852689_sentinel": "",
+                            "entry.325369499_sentinel": "",
+                            "entry.1508918824_sentinel": "",
+                            "entry.1003945292_sentinel": "",
+                            "fvv": "1",
+                            "draftResponse": '[null,null,"-1322386903815409528"]',
+                            "pageHistory": "0",
+                            "fbzx": "-1322386903815409528"
+                        },
+
+                        headers=headers)
+        
+        if r.status_code == 200:
+            status = "OK"
+        elif r.status_code == 429:
+            status ="TooManyRequests (хватит на сегодня)"
+        elif r.status_code == 405:
+            status = "MethodNotAllowed (Вас заметили)"
+        else:
+            status = "Undefined"
+
+        i += 1
+
+        # print("==============================================\n\n\n")
+        LogManager.info(f"{r} === {i} <<== ==>> {status}")
+        # print("\n\n\n==============================================\n\n\n")
+
 while True:
-    r = requests.post("https://docs.google.com/forms/u/0/d/e/1FAIpQLSfSA182h4jGDBIOcfyMgxeorPUokkb26QS4KZtMpB5H6O3ZcA/formResponse",
-                      data={
-                          "entry.447101162": "9",
-                          "entry.1043893031": _first_answer_,
-                          "entry.806414291": _second_answer_,
-                          "entry.1293916860": _third_answer_,
-                          "entry.635193400": jojo,
-                          "entry.1625556646": jojo,
-                          "entry.24742125": jojo,
-                          "entry.731997419": jojo,
-                          "entry.877852689": jojo,
-                          "entry.325369499": jojo,
-                          "entry.1508918824": jojo,
-                          "entry.1003945292": "5",
-                          "entry.635193400_sentinel": "",
-                          "entry.1625556646_sentinel": "",
-                          "entry.24742125_sentinel": "",
-                          "entry.731997419_sentinel": "",
-                          "entry.877852689_sentinel": "",
-                          "entry.325369499_sentinel": "",
-                          "entry.1508918824_sentinel": "",
-                          "entry.1003945292_sentinel": "",
-                          "fvv": "1",
-                          "draftResponse": '[null,null,"-1322386903815409528"]',
-                          "pageHistory": "0",
-                          "fbzx": "-1322386903815409528"
-                      },
-
-                      headers=headers)
-    
-    if r.status_code == 200:
-        status = "OK"
-    elif r.status_code == 429:
-        status ="TooManyRequests (хватит на сегодня)"
-    elif r.status_code == 405:
-        status = "MethodNotAllowed (Вас заметили)"
-    else:
-        status = "Undefined"
-
-    i += 1
-
-    # print("==============================================\n\n\n")
-    LogManager.info(f"{r} === {i} <<== ==>> {status}")
-    # print("\n\n\n==============================================\n\n\n")
+    threading.Thread(target = raid, args = (_first_answer_, _second_answer_, _third_answer_, jojo)).start()
 
 # 'proxies = {
 # "https" : "https://159.8.114.34:8123"
