@@ -7,6 +7,10 @@ import requests
 LogManager = LogManager()
 import threading
 import click
+import json
+
+
+proxies = None
 
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.80 Safari/537.36 Edg/86.0.622.43'
@@ -94,7 +98,8 @@ def raid(a, b, c, d, e:int):
                             "fbzx": "-1322386903815409528"
                         },
 
-                        headers=headers)
+                        headers=headers,
+                        proxies = proxies)
         
         thr = threading.enumerate()[len(threading.enumerate()) - 1]
         
@@ -135,7 +140,8 @@ def sanya(a, b, c, vv:int):
                             "pageHistory": "0",
                             "fbzx": "225161449973291891"
                         },
-                        headers=headers)
+                        headers=headers,
+                        proxies = proxies)
     
     thr = threading.enumerate()[len(threading.enumerate()) - 1]
     
