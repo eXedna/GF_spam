@@ -113,6 +113,47 @@ def raid(a, b, c, d, e:int):
         else:
             status = "Undefined"
             LogManager.error(f"{thr} === {r} === {e + 1} === {status}")
+            
+rand_list = ["Yuno", "Ayumu Kasuga Osaka", "Kiri Komori", "Asuka Soryu Langley", "Kotonoha Katsura", "Machi", "Rika Furude", "Ai Enma", "Nausicaä", "Yoko Littner", "Hitagi Senjougahara", "Ika Musume", "Rena Ryuuguu", "Anna Kurauchi", "Miyako", "Poplar Taneshima", "Akira Amatsume", "Himeko Katagiri", "Suiseiseki", "Hitoha Marui", "Ayumu Nishizawa", "Nadeko Sengoku", "Lum", "Aono Morimiya", "Shion Fujino", "Shiki Ryougi", "Lina Inverse", "Aoi Yamada", "Haruko Haruhara", "Yuki Nagato", "Kaede Fuyou", "Chiri Kitsu", "Ayumi Yamada", "Misaki Nakahara", "Megumi Noda", "Hanyuu Furude", "Kafuka Fuura", "Faye Valentine", "Tomoko Kuroki", "Tamaki Kawazoe", "Kino", "Ayu Tsukimiya", "Mion Sonozaki", "Excel", "Fuuko Ibuki", "Rin Kaga", "Kou", "Celty Sturluson", "Ana Coppola", "Nino", "Sayoko Kurosaki",
+             "Tsukasa Hiiragi", "Guchuko", "Sun Seto", "Shouko Kirishima", "Balalaika", "Ukyo Kuonji", "Aika Granzchesta", "Nobue Itoh", "Rebecca Miyamoto", "Alice Carroll", "Isumi Saginomiya", "Ichijou", "Chizuru Minamoto", "Chiaki Minami", "Suigintou", "Marii Buratei", "Nano Shinonome", "Akari Akaza", "Murasaki Kuhouin", "Horo", "Konata Izumi", "Riza Hawkeye", "Sora Kajiwara", "Himeko Inaba", "Dorm Leader", "Risa Koizumi", "Sakaki", "Futaba Marui", "Satsuki Kitaoji", "Nori", "Nagisa Furukawa", "Mahoro Andou", "Rakka", "Chihiro Shindou", "Rei Ayanami", "Haruhi Fujioka", "Yuuko Ichihara", "Mai Kawasumi", "Maki Umezaki", "Tsuyuri", "Kana Minami", "Tsumugi Kotobuki", "Mamimi Samejima", "Olivier Mira Armstrong", "Nanami Aoyama", "Kuro Kagami", "Mashiro Shiina", "Yakumo Tsukamoto", "Matsurika Shinouji"]
+
+da_net = ["Да", "Нет"]
+
+genders = ['Agender', 'Androgyne', 'Androgynous', 'Bigender', 'Cis', 'FTM', 'Gender Fluid', 'Gender Nonconforming', 'Gender Questioning',
+           'Gender Variant', 'Genderqueer', 'Neither', 'Neutrois', 'Non-binary', 'Other', 'Pangender', 'Two-spirit', 'Anongender', 'Cavusgender',
+           'Zodiacgender', 'Aesthetgender', 'Affectugender', 'Digigender', 'Egogender']
+            
+def sanya(a, b, c, vv:int):
+    out = requests.post("https://docs.google.com/forms/u/0/d/e/1FAIpQLSc9CFL6d7qKMJUzKl-FUGWONREe6y9PygPzDIVkeDSyU4-bpg/formResponse",
+                        data={
+                            "entry.1508740013": a,
+                            "entry.297670832": b,
+                            "entry.347858582": c,
+                            "entry.347858582_sentinel": "",
+                            "fvv": "1",
+                            "draftResponse": '[null,null,"225161449973291891"]',
+                            "pageHistory": "0",
+                            "fbzx": "225161449973291891"
+                        },
+                        headers=headers)
+    
+    thr = threading.enumerate()[len(threading.enumerate()) - 1]
+    
+    if out.status_code == 200:
+        status = "OK"
+        LogManager.info(f"{thr} === {out} === {vv + 1} === {status}")
+    elif out.status_code == 429:
+        status ="TooManyRequests"
+        LogManager.warning(f"{thr} === {out} === {vv + 1} === {status}")
+    elif out.status_code == 405:
+        status = "MethodNotAllowed"
+        LogManager.warning(f"{thr} === {out} === {vv + 1} === {status}")
+    elif out.status_code == 404:
+        status = "NotFound"
+        LogManager.error(f"{thr} === {out} === {vv + 1} === {status}")
+    else:
+        status = "Undefined"
+        LogManager.error(f"{thr} === {out} === {vv + 1} === {status}")
 
 @click.command()
 @click.option('--link', default = True, help = 'Show raiding link')
@@ -127,7 +168,7 @@ def starter(link, resp, raid):
             print("______  __    ______        \n___  / / /_______  /_______\n__  /_/ /_  _ \_  /___  __ \"\n_  __  / /  __/  / __  /_/ /\n/_/ /_/  \___//_/  _  .___/ \n                   /_/      \n")
             print(_link)
         if resp == "headers":
-            Response("headers")
+            Response("headers")                             
         if resp == "content":
             Response("content")
         if "content" in resp and len(resp) != 7:
@@ -163,16 +204,48 @@ def starter(link, resp, raid):
             print('         \/____/                  \/____/                  ~~                       ~~                       \/____/                  \/____/   \/____/ ')
             print('                                                                                                                                                        ')
             
-            start()
+            start1()
         
         # else:
             # LogManager.error("python __name__ --help for show help command")
+         
+        if raid == 2: 
+            print('\033[36m' + '          _____                    _____                    _____                    _____                    _____                    _____     _____  ')
+            print('         /\    \                  /\    \                  /\    \                  /\    \                  /\    \                  /\    \   /\    \ ')
+            print('        /::\____\                /::\    \                /::\    \                /::\    \                /::\    \                /::\____\ /::\____\'')
+            print('       /:::/    /                \:::\    \              /::::\    \              /::::\    \              /::::\    \              /:::/    //:::/    /')
+            print('      /:::/    /                  \:::\    \            /::::::\    \            /::::::\    \            /::::::\    \            /:::/    //:::/    / ')
+            print('     /:::/    /                    \:::\    \          /:::/\:::\    \          /:::/\:::\    \          /:::/\:::\    \          /:::/    //:::/    /  ')
+            print('    /:::/____/                      \:::\    \        /:::/  \:::\    \        /:::/__\:::\    \        /:::/__\:::\    \        /:::/    //:::/    /   ')
+            print('   /::::\    \                      /::::\    \      /:::/    \:::\    \      /::::\   \:::\    \      /::::\   \:::\    \      /:::/    //:::/    /    ')
+            print('  /::::::\    \   _____    ____    /::::::\    \    /:::/    / \:::\    \    /::::::\   \:::\    \    /::::::\   \:::\    \    /:::/    //:::/    /     ')
+            print(' /:::/\:::\    \ /\    \  /\   \  /:::/\:::\    \  /:::/    /   \:::\ ___\  /:::/\:::\   \:::\ ___\  /:::/\:::\   \:::\    \  /:::/    //:::/    /      ')
+            print('/:::/  \:::\    /::\____\/::\   \/:::/  \:::\____\/:::/____/     \:::|    |/:::/__\:::\   \:::|    |/:::/__\:::\   \:::\____\/:::/____//:::/____/       ')
+            print('\::/    \:::\  /:::/    /\:::\  /:::/    \::/    /\:::\    \     /:::|____|\:::\   \:::\  /:::|____|\:::\   \:::\   \::/    /\:::\    \\:::\    \       ')
+            print(' \/____/ \:::\/:::/    /  \:::\/:::/    / \/____/  \:::\    \   /:::/    /  \:::\   \:::\/:::/    /  \:::\   \:::\   \/____/  \:::\    \\:::\    \      ')
+            print('          \::::::/    /    \::::::/    /            \:::\    \ /:::/    /    \:::\   \::::::/    /    \:::\   \:::\    \       \:::\    \\:::\    \     ')
+            print('           \::::/    /      \::::/____/              \:::\    /:::/    /      \:::\   \::::/    /      \:::\   \:::\____\       \:::\    \\:::\    \    ')
+            print('           /:::/    /        \:::\    \               \:::\  /:::/    /        \:::\  /:::/    /        \:::\   \::/    /        \:::\    \\:::\    \   ')
+            print('          /:::/    /          \:::\    \               \:::\/:::/    /          \:::\/:::/    /          \:::\   \/____/          \:::\    \\:::\    \  ')
+            print('         /:::/    /            \:::\    \               \::::::/    /            \::::::/    /            \:::\    \               \:::\    \\:::\    \ ')
+            print('        /:::/    /              \:::\____\               \::::/    /              \::::/    /              \:::\____\               \:::\____\\:::\____\'')
+            print('        \::/    /                \::/    /                \::/____/                \::/____/                \::/    /                \::/    / \::/    /')
+            print('         \/____/                  \/____/                  ~~                       ~~                       \/____/                  \/____/   \/____/ ')
+            print('                                                                                                                                                        ')
+            
+            start2()
             
     except Exception as er:
         # LogManager.error("python __name__ --help for show help command")
         LogManager.error(er)
 
-def start(): 
+def start2():
+    i = 0
+    while True:
+        threading.Thread(target = sanya, args = (random.choice(rand_list), random.choice(genders), random.choice(da_net), i)).start()
+        i += 1  
+
+def start1(): 
 
     i = 0
     while True:
