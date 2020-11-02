@@ -25,14 +25,14 @@ _link = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfSA182h4jGDBIOcfyMgxeorPU
 jojo = random.choice(random_num)
  
 def Response(a):
-    resp = requests.get("https://docs.google.com/forms/u/0/d/e/1FAIpQLSfSA182h4jGDBIOcfyMgxeorPUokkb26QS4KZtMpB5H6O3ZcA/formResponse")
+    resp = requests.get(_link)
     if a == "headers":
         LogManager.info(resp.headers)
     elif a == "content":
         LogManager.info(resp.content)
         
 def StatusCode():
-    resp = requests.get("https://docs.google.com/forms/u/0/d/e/1FAIpQLSfSA182h4jGDBIOcfyMgxeorPUokkb26QS4KZtMpB5H6O3ZcA/formResponse")
+    resp = requests.get(_link)
     res = resp.status_code
         
     if res == 200:
