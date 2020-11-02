@@ -74,12 +74,15 @@ def raid(a, b, c, d, e:int):
 @click.command()
 @click.option('--link', default = True, help = 'Show raiding link')
 @click.option('--raid', default = 3, help = 'Start ddos')
-def do_work(link, raid):
-    print("______  __    ______        \n___  / / /_______  /_______\n__  /_/ /_  _ \_  /___  __ \"\n_  __  / /  __/  / __  /_/ /\n/_/ /_/  \___//_/  _  .___/ \n                   /_/      \n")
+def starter(link, raid):
+    
+    """Google Form`s ddoser script`s help`s command:\\//"""
+    
     if link == "get":
+        print("______  __    ______        \n___  / / /_______  /_______\n__  /_/ /_  _ \_  /___  __ \"\n_  __  / /  __/  / __  /_/ /\n/_/ /_/  \___//_/  _  .___/ \n                   /_/      \n")
         print(_link)
     if raid == 1:
-                    
+
         print('\033[36m' + '          _____                    _____                    _____                    _____                    _____                    _____     _____  ')
         print('         /\    \                  /\    \                  /\    \                  /\    \                  /\    \                  /\    \   /\    \ ')
         print('        /::\____\                /::\    \                /::\    \                /::\    \                /::\    \                /::\____\ /::\____\'')
@@ -113,7 +116,7 @@ def start():
         i += 1
       
 if __name__ == "__main__":  
-    do_work()
+    starter()
     
 # 'proxies = {
 # "https" : "https://159.8.114.34:8123"
