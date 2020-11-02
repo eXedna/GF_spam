@@ -23,21 +23,31 @@ random_num = [1, 5]
 _link = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfSA182h4jGDBIOcfyMgxeorPUokkb26QS4KZtMpB5H6O3ZcA/formResponse"
 
 jojo = random.choice(random_num)
- 
-def Response(a):
-    resp = requests.get(_link)
+
+def erase(a:str, b:int):
+    a = a[:b] + a[b + 1:]
+    
+    return a
+     
+def Response(a, *args, **kwargs):
+    
+    if len(args) != 0:
+        resp = requests.get(erase(args[0], 0))
+    else:
+        resp = requests.get(_link)
+            
     if a == "headers":
         LogManager.info(resp.headers)
-    elif a == "content":
+    elif a == "content":                        
         LogManager.info(resp.content)
         
 def StatusCode(*args, **kwargs):
     if len(args) != 0:
-        resp = requests.get(args[0].replace(args[0][0], ''))
+        resp = requests.get(erase(args[0], 0))
     else:
         resp = requests.get(_link)
     res = resp.status_code
-        
+    
     if res == 200:
         s = "OK"
         LogManager.info(f"[{res}] {s}")   
@@ -47,6 +57,9 @@ def StatusCode(*args, **kwargs):
     elif res == 405:
         s = "MethotNotAllowed"
         LogManager.warning(f"[{res}] {s}")
+    elif res == 404:
+        s = "NotFound -- MayBePrivate"
+        LogManager.error(f"[{res}] {s}") 
     else:
         s = "Undefined"
         LogManager.error(f"[{res}] {s}")
@@ -83,20 +96,23 @@ def raid(a, b, c, d, e:int):
 
                         headers=headers)
         
+        thr = threading.enumerate()[len(threading.enumerate()) - 1]
+        
         if r.status_code == 200:
             status = "OK"
+            LogManager.info(f"{thr} === {r} === {e + 1} === {status}")
         elif r.status_code == 429:
             status ="TooManyRequests"
+            LogManager.warning(f"{thr} === {r} === {e + 1} === {status}")
         elif r.status_code == 405:
             status = "MethodNotAllowed"
+            LogManager.warning(f"{thr} === {r} === {e + 1} === {status}")
+        elif r.status_code == 404:
+            status = "NotFound"
+            LogManager.error(f"{thr} === {r} === {e + 1} === {status}")
         else:
             status = "Undefined"
-
-        thr = threading.enumerate()[len(threading.enumerate()) - 1]
-
-        # print("==============================================\n\n\n")
-        LogManager.info(f"{thr} === {r} === {e + 1} === {status}")
-        # print("\n\n\n==============================================\n\n\n")
+            LogManager.error(f"{thr} === {r} === {e + 1} === {status}")
 
 @click.command()
 @click.option('--link', default = True, help = 'Show raiding link')
@@ -114,6 +130,10 @@ def starter(link, resp, raid):
             Response("headers")
         if resp == "content":
             Response("content")
+        if "content" in resp and len(resp) != 7:
+            Response("content", resp[7:])
+        if "headers" in resp and len(resp) != 7:
+            Response("headers", resp[7:])
         if "status" in resp and len(resp) != 6:
             StatusCode(resp[6:])
         if resp == "status":
@@ -149,7 +169,8 @@ def starter(link, resp, raid):
             # LogManager.error("python __name__ --help for show help command")
             
     except Exception as er:
-        LogManager.error("python __name__ --help for show help command")
+        # LogManager.error("python __name__ --help for show help command")
+        LogManager.error(er)
 
 def start(): 
 
