@@ -1,11 +1,13 @@
+const fs = require("fs");
+
 const {dop, Getter} = require("./dop.js");
 
 FB_PUBLIC_LOAD_DATA_ = Getter();
 
-var answers = [];
+let answers = [];
 
 FB_PUBLIC_LOAD_DATA_[1][1].forEach((element) => {
-    var temp = [];
+    let temp = [];
     try {
       element[4][0][1].forEach((ans) => {
         temp.push(ans[0]);
@@ -18,10 +20,12 @@ FB_PUBLIC_LOAD_DATA_[1][1].forEach((element) => {
     });
   });
 
-for (var i = 0; i < answers.length; i++) {
+for (let i = 0; i < answers.length; i++) {
     if (answers[i]['value'].length == 0) {
         answers[i]['value'] = "LongAnswer";
     };
 }
 
 console.log(answers);
+
+fs.writeFileSync("inf.txt", JSON.stringify(answers))

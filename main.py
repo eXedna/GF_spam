@@ -3,11 +3,45 @@
 from typing import Set
 import requests
 import random
+
+from requests.api import head
 from LogPython import LogManager
 import requests
 LogManager = LogManager()
 import threading
 import click
+import os
+import json
+import sys
+
+                        #     "entry.447101162": "9",
+                        #     "entry.1043893031": a,
+                        #     "entry.806414291": b,
+                        #     "entry.1293916860": c,
+                        #     "entry.635193400": d,
+                        #     "entry.1625556646": d,
+                        #     "entry.24742125": d, 
+                        #     "entry.731997419": d,
+                        #     "entry.877852689": d,
+                        #     "entry.325369499": d,
+                        #     "entry.1508918824": d,
+                        #     "entry.1003945292": "5",
+                        #     "entry.635193400_sentinel": "",
+                        #     "entry.1625556646_sentinel": "",
+                        #     "entry.24742125_sentinel": "",
+                        #     "entry.731997419_sentinel": "",
+                        #     "entry.877852689_sentinel": "",
+                        #     "entry.325369499_sentinel": "",
+                        #     "entry.1508918824_sentinel": "",
+                        #     "entry.1003945292_sentinel": "",
+                        #     "fvv": "1",
+                        #     "draftResponse": '[null,null,"-1322386903815409528"]',
+                        #     "pageHistory": "0",
+                        #     "fbzx": "-1322386903815409528"
+                        # },
+
+                        # headers=headers,
+                        # proxies = proxies)
 
 proxies = None
 
@@ -68,15 +102,23 @@ def StatusCode(*args, **kwargs):
         LogManager.error(f"[{res}] {s}")
 
 def GetInput():
-    resp = requests.get(_link).text
     
-    resp = resp[resp.find("var FB_PUBLIC_LOAD_DATA_ "):]
-    resp = resp[:resp.find(',"/forms"')]
+    os.system("node main.js")
     
-    print(resp)
+    resp = open("inf.txt", "r", encoding="utf-8").readline()
     
-def SetInput():
-    resp = requests.get(_link).text
+    resp = json.loads(resp)
+    
+    for r in resp:
+        r['id'] = 'entry.' + str(r['id'])
+        
+    return resp    
+            
+res = dict()
+
+        
+def SetInput(a):
+    resp = requests.get(a).text
     resp = resp[resp.find("var FB_PUBLIC_LOAD_DATA_ "):]
     resp = resp[:resp.find(',"/forms"')]
     
@@ -85,37 +127,19 @@ def SetInput():
     open('dop.js', 'w', encoding = "utf-8").write("module.exports.Getter = function Getter() {\n" + resp + "]" + "\nreturn FB_PUBLIC_LOAD_DATA_;}")
                 
 def raid(a, b, c, d, e:int):
+    for i in GetInput():
+        res[i['id']] = random.choice(i['value'])
+        
+    res["fvv"] = "1"
+    res["draftResponse"] = '[null,null,"-1322386903815409528"]'
+    res["pageHistory"] = "0"
+    res["fbzx"] = "-1322386903815409528"
+    
     while True:
-        r = requests.post(_link,
-                        data={
-                            "entry.447101162": "9",
-                            "entry.1043893031": a,
-                            "entry.806414291": b,
-                            "entry.1293916860": c,
-                            "entry.635193400": d,
-                            "entry.1625556646": d,
-                            "entry.24742125": d, 
-                            "entry.731997419": d,
-                            "entry.877852689": d,
-                            "entry.325369499": d,
-                            "entry.1508918824": d,
-                            "entry.1003945292": "5",
-                            "entry.635193400_sentinel": "",
-                            "entry.1625556646_sentinel": "",
-                            "entry.24742125_sentinel": "",
-                            "entry.731997419_sentinel": "",
-                            "entry.877852689_sentinel": "",
-                            "entry.325369499_sentinel": "",
-                            "entry.1508918824_sentinel": "",
-                            "entry.1003945292_sentinel": "",
-                            "fvv": "1",
-                            "draftResponse": '[null,null,"-1322386903815409528"]',
-                            "pageHistory": "0",
-                            "fbzx": "-1322386903815409528"
-                        },
-
-                        headers=headers,
-                        proxies = proxies)
+        r = requests.post(_link, 
+                          data = res,
+                          headers = headers,
+                          proxies = proxies)
         
         thr = threading.enumerate()[len(threading.enumerate()) - 1]
         
@@ -134,6 +158,8 @@ def raid(a, b, c, d, e:int):
         else:
             status = "Undefined"
             LogManager.error(f"{thr} === {r} === {e + 1} === {status}")
+            
+    pass
             
 rand_list = ["Yuno", "Ayumu Kasuga Osaka", "Kiri Komori", "Asuka Soryu Langley", "Kotonoha Katsura", "Machi", "Rika Furude", "Ai Enma", "Nausicaä", "Yoko Littner", "Hitagi Senjougahara", "Ika Musume", "Rena Ryuuguu", "Anna Kurauchi", "Miyako", "Poplar Taneshima", "Akira Amatsume", "Himeko Katagiri", "Suiseiseki", "Hitoha Marui", "Ayumu Nishizawa", "Nadeko Sengoku", "Lum", "Aono Morimiya", "Shion Fujino", "Shiki Ryougi", "Lina Inverse", "Aoi Yamada", "Haruko Haruhara", "Yuki Nagato", "Kaede Fuyou", "Chiri Kitsu", "Ayumi Yamada", "Misaki Nakahara", "Megumi Noda", "Hanyuu Furude", "Kafuka Fuura", "Faye Valentine", "Tomoko Kuroki", "Tamaki Kawazoe", "Kino", "Ayu Tsukimiya", "Mion Sonozaki", "Excel", "Fuuko Ibuki", "Rin Kaga", "Kou", "Celty Sturluson", "Ana Coppola", "Nino", "Sayoko Kurosaki",
              "Tsukasa Hiiragi", "Guchuko", "Sun Seto", "Shouko Kirishima", "Balalaika", "Ukyo Kuonji", "Aika Granzchesta", "Nobue Itoh", "Rebecca Miyamoto", "Alice Carroll", "Isumi Saginomiya", "Ichijou", "Chizuru Minamoto", "Chiaki Minami", "Suigintou", "Marii Buratei", "Nano Shinonome", "Akari Akaza", "Murasaki Kuhouin", "Horo", "Konata Izumi", "Riza Hawkeye", "Sora Kajiwara", "Himeko Inaba", "Dorm Leader", "Risa Koizumi", "Sakaki", "Futaba Marui", "Satsuki Kitaoji", "Nori", "Nagisa Furukawa", "Mahoro Andou", "Rakka", "Chihiro Shindou", "Rei Ayanami", "Haruhi Fujioka", "Yuuko Ichihara", "Mai Kawasumi", "Maki Umezaki", "Tsuyuri", "Kana Minami", "Tsumugi Kotobuki", "Mamimi Samejima", "Olivier Mira Armstrong", "Nanami Aoyama", "Kuro Kagami", "Mashiro Shiina", "Yakumo Tsukamoto", "Matsurika Shinouji"]
@@ -199,10 +225,12 @@ def starter(link, resp, raid):
             Response("headers", resp[7:])
         if "status" in resp and len(resp) != 6:
             StatusCode(resp[6:])
+        if "set_input" in resp and len(resp) != 9:
+            SetInput(resp[10:])
         if resp == "get_input":
             GetInput()
         if resp == "set_input":
-            SetInput();
+            SetInput(_link);
         if resp == "status":
             StatusCode()
         if raid == 1:
