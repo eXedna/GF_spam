@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from json.decoder import JSONDecodeError
 from typing import Set
 import requests
 import random
@@ -12,6 +13,8 @@ import threading
 import click
 import os
 import json
+
+
 
                         #     "entry.447101162": "9",
                         #     "entry.1043893031": a,
@@ -42,11 +45,11 @@ import json
                         # headers=headers,
                         # proxies = proxies)
 
-
-proxies = None
+proxies = {"https":"https://cool-leaf-5479p1000:QAKyMxtT@167.99.195.184:5050"}
 
 headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.80 Safari/537.36 Edg/86.0.622.43'
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.80 Safari/537.36 Edg/86.0.622.43',
+    'Api key' : "30a1a2d2fd7fb4de19d1ed5408fbe291df5c4c935383be97e024188605"
 }
 
 _first_answer_ = 'Зачем задавать такой вопрос, если проблема в индивидуальном расписании? - при индивидуальном расписании пропадали уроки, на каждом третьем уроке учеников больше чем посадочных мест, по большей мере хаотичное распределение по группам, например, информатика, физика и русский (когда распределение по уровню было). Даже непонятно, было ли распределение по уровню знаний по некоторым предметам. Отсутствие возможности перейти в другую группу, несмотря на то, что обещали, что это не будет проблемой. По словам преподавателей, чтобы перейти в группу с якобы более высоким уровнем преподавания, нужно решать дополнительное задание, которое будет (момент времени, когда оно должно там появиться естественно не оговаривается) в гугл классе этой группы. К слову, задания в гугл классе нет и, как я думаю, не будет. Так же интересует вопрос с окнами посреди школьного дня, пустые промежутки между седьмым и восьмым уроком, вовремя которых нужно заниматься непонятно чем. Из-за этих бесполезных промежутков ученики возвращаются домой минимум на два часа позже, когда могли вернуться домой и спокойно заняться своими делами, вместо этого они вынуждены находиться в школе и буквально "убивать время". Не говоря о том, что в некоторых случаях на уроке было только половина учеников, а вторая половина шла не по расписанию и из-за этого фактически пропадали уроки, можно сказать о том, что такой урок как физкультура полностью пропал из расписания и его по факту не существует как предмета уже месяц. Недавно поднялся вопрос о том, что группа Регины Рашидовны по геометрии не может написать акр просто потому, что для него нужно два подряд идущих урока, которые у нас есть только заочно. Казалось бы, Аветис Грачевич, как классный руководитель и директор, мог отпустить  учеников с одного, максимум с двух уроков, чтобы они без проблем написали акр. Я бы не писал(а) об этом инциденте, если бы все произошло так, как я предполагал(а), но акр эта группа так и не написала, поэтому пришлось высказать это. Короче говоря, в пуме царит хаос и беспорядок, противоположно словам директора в этой школе полнейшее отсутствие дисциплины и порядка. Не буду затрагивать тему некой иерархии в пуме, которая сформировалась еще в прошлом году и не распалась до сих пор. В некоторый момент времени возникло такое ощущение, что в пуме все делается в последний момент и на скорую руку. Никакой речи о планировании идти не может.'
@@ -58,9 +61,6 @@ _third_answer_ = 'Если вы дочитали до этого момента,
 random_num = [1, 5]
 
 _link = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfSA182h4jGDBIOcfyMgxeorPUokkb26QS4KZtMpB5H6O3ZcA/formResponse"
-
-print(requests.get(_link).text)
-
 
 jojo = random.choice(random_num)
 
@@ -104,8 +104,14 @@ def StatusCode(*args, **kwargs):
         s = "Undefined"
         LogManager.error(f"[{res}] {s}")
 
-respG = open("inf.txt", "r", encoding="utf-8").readline()
-respG = json.loads(respG)
+try:
+    respG = open("inf.txt", "r", encoding="utf-8").readline()
+    respG = json.loads(respG)
+except JSONDecodeError:
+    LogManager.error("Temp error")
+except:
+    _temp = open("inf.txt", 'w')
+    _temp.close()
 
 def InputUpdater():
     for r in respG:
@@ -219,7 +225,7 @@ def sanya(a, b, c, vv:int):
 @click.option('--link', default = True, help = 'Show raiding link')
 @click.option('--raid', default = 3, help = 'Start ddos')
 @click.option('--resp', default = "text", help = "Get response")
-def starter(link, resp, raid):
+def starter(link, resp, raid):                                              
     
     """Google Form`s ddoser script`s help`s command:\\//"""
     
@@ -312,11 +318,14 @@ def start2():
         i += 1  
 
 def start1(): 
-
     i = 0
-    while True:
-        threading.Thread(target = raid, args = (_first_answer_, _second_answer_, _third_answer_, jojo, i)).start()
-        i += 1
+    
+    raid(_first_answer_, _second_answer_, _third_answer_, jojo, i)
+
+
+    # while True:
+    #     # threading.Thread(target = raid, args = (_first_answer_, _second_answer_, _third_answer_, jojo, i)).start()
+    #     i += 1
       
 if __name__ == "__main__":  
     starter()
