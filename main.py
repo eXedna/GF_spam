@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from json.decoder import JSONDecodeError
-from typing import Set
 import requests
 import random
 
-from requests.api import head
 from LogPython import LogManager
 import requests
 LogManager = LogManager()
@@ -15,6 +13,7 @@ import click
 import os
 import json
 import re
+import sys
 
 from http.client import responses
 
@@ -32,7 +31,7 @@ _third_answer_ = 'Если вы дочитали до этого момента,
 
 random_num = [1, 5]
 
-_link = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfSA182h4jGDBIOcfyMgxeorPUokkb26QS4KZtMpB5H6O3ZcA/formResponse"
+_link = 'https://docs.google.com/forms/d/e/1FAIpQLSdkVj0GVp_ZMV1gab7V7UP0Ct-aij-A4juxI3_roq3sukwR-A/viewform?usp=sf_link'
 
 jojo = random.choice(random_num)
 
@@ -40,6 +39,29 @@ def erase(a:str, b:int):
     a = a[:b] + a[b + 1:]
     
     return a
+
+def SetLink(change):
+    try: 
+        testing_term = requests.get(change)
+    except:
+        LogManager.error("Invalid Link (На самом деле инвалид перед экраном)")
+        sys.exit(0)
+        
+    f = open(__file__, "r", encoding = "utf-8")
+
+    regex = r"_link\s*\=\s*\'(.*)\'"
+
+    current_file = f.read()
+    f.close()
+    r = re.search(regex, current_file).group(1)
+
+    current_file = current_file.replace(r, change)
+
+    f = open(__file__, "w", encoding = "utf-8")
+    f.write(current_file)
+    f.close()   
+     
+    LogManager.info("Link changed")
      
 def Response(a, *args, **kwargs):
     
@@ -113,27 +135,24 @@ def RaidComporator(ServeList):
 jojo = InputUpdater()
                   
 def raid(a, b, c, d, e:int):
-    while True:
+        
+    for i in range(100):
         RaidReqList = RaidComporator(jojo)
-        
-        print(RaidReqList)
-        
+                
         r = requests.post(_link, 
                           data = RaidReqList,
                           headers = headers,
                           proxies = proxies)
-        
-        thr = threading.enumerate()[len(threading.enumerate()) - 1]
-        
+                
         if r.status_code == 200:
             status = "OK"
-            LogManager.info(f"{thr} === {r} === {e + 1} === {status}")
+            LogManager.info(f"{r} === {e + 1} === {status}")
         elif r.status_code == 405 or r.status_code == 404 or r.status_code == 429:
             status = responses[r.status_code]
-            LogManager.warning(f"{thr} === {r} === {e + 1} === {status}")
+            LogManager.warning(f"{r} === {e + 1} === {status}")
         else:
             status = responses[r.status_code]
-            LogManager.error(f"{thr} === {r} === {e + 1} === {status}")
+            LogManager.error(f"{r} === {e + 1} === {status}")
                         
 rand_list = ["Yuno", "Ayumu Kasuga Osaka", "Kiri Komori", "Asuka Soryu Langley", "Kotonoha Katsura", "Machi", "Rika Furude", "Ai Enma", "Nausicaä", "Yoko Littner", "Hitagi Senjougahara", "Ika Musume", "Rena Ryuuguu", "Anna Kurauchi", "Miyako", "Poplar Taneshima", "Akira Amatsume", "Himeko Katagiri", "Suiseiseki", "Hitoha Marui", "Ayumu Nishizawa", "Nadeko Sengoku", "Lum", "Aono Morimiya", "Shion Fujino", "Shiki Ryougi", "Lina Inverse", "Aoi Yamada", "Haruko Haruhara", "Yuki Nagato", "Kaede Fuyou", "Chiri Kitsu", "Ayumi Yamada", "Misaki Nakahara", "Megumi Noda", "Hanyuu Furude", "Kafuka Fuura", "Faye Valentine", "Tomoko Kuroki", "Tamaki Kawazoe", "Kino", "Ayu Tsukimiya", "Mion Sonozaki", "Excel", "Fuuko Ibuki", "Rin Kaga", "Kou", "Celty Sturluson", "Ana Coppola", "Nino", "Sayoko Kurosaki",
              "Tsukasa Hiiragi", "Guchuko", "Sun Seto", "Shouko Kirishima", "Balalaika", "Ukyo Kuonji", "Aika Granzchesta", "Nobue Itoh", "Rebecca Miyamoto", "Alice Carroll", "Isumi Saginomiya", "Ichijou", "Chizuru Minamoto", "Chiaki Minami", "Suigintou", "Marii Buratei", "Nano Shinonome", "Akari Akaza", "Murasaki Kuhouin", "Horo", "Konata Izumi", "Riza Hawkeye", "Sora Kajiwara", "Himeko Inaba", "Dorm Leader", "Risa Koizumi", "Sakaki", "Futaba Marui", "Satsuki Kitaoji", "Nori", "Nagisa Furukawa", "Mahoro Andou", "Rakka", "Chihiro Shindou", "Rei Ayanami", "Haruhi Fujioka", "Yuuko Ichihara", "Mai Kawasumi", "Maki Umezaki", "Tsuyuri", "Kana Minami", "Tsumugi Kotobuki", "Mamimi Samejima", "Olivier Mira Armstrong", "Nanami Aoyama", "Kuro Kagami", "Mashiro Shiina", "Yakumo Tsukamoto", "Matsurika Shinouji"]
@@ -157,6 +176,10 @@ def starter(link, resp, raid, log):
         if link == "get":
             print("______  __    ______        \n___  / / /_______  /_______\n__  /_/ /_  _ \_  /___  __ \"\n_  __  / /  __/  / __  /_/ /\n/_/ /_/  \___//_/  _  .___/ \n                   /_/      \n")
             print(_link)
+        if link == "set":
+            print("______  __    ______        \n___  / / /_______  /_______\n__  /_/ /_  _ \_  /___  __ \"\n_  __  / /  __/  / __  /_/ /\n/_/ /_/  \___//_/  _  .___/ \n                   /_/      \n")
+            SetLink(input(" Enter new raid link : "))
+        
         if resp == "headers":
             Response("headers")                             
         if resp == "content":
@@ -209,17 +232,26 @@ def starter(link, resp, raid, log):
         LogManager.error(er)
 
 def start1(): 
-    i = 0
-
-
-    while True:
-        threading.Thread(target = raid, args = (_first_answer_, _second_answer_, _third_answer_, jojo, i)).start()
-        i += 1
+    i = 123
+    _ = list()
+    
+    for i in range(10):
+        thr = threading.Thread(target = raid, args = (_first_answer_, _second_answer_, _third_answer_, jojo, i), deamon = True)
+        thr.start()    
+        _.append(thr)
+        
+    [t.join() for t in _]    
+        
+        # raid(_first_answer_, _second_answer_, _third_answer_, jojo, i)
       
 if __name__ == "__main__":  
+    
+    print('Click Version: {}'.format(click.__version__))
+    print('Python Version: {} \n'.format(sys.version))
+    
     starter()
     
-# 'proxies = {
+# 'proxies = {                                                                      
 # "https" : "https://159.8.114.34:8123"
 # }'
 
