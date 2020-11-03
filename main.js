@@ -18,17 +18,24 @@ var FB_PUBLIC_LOAD_DATA_ = [null,[null,[[79120055,"Имя?",null,0,[[1508740013,
 ]
 ]
 
-var questions_id = [];
-
+var ans_props = [];
+var status = "FormatAnswer";
+var id = 0;
+var _ans = [];
+                              
 for (var i = 0; i < 3; i++) {
-    questions_id.push(FB_PUBLIC_LOAD_DATA_[1][1][i][4][0][0])
+    id = FB_PUBLIC_LOAD_DATA_[1][1][i][4][0][0];
 
     if ((FB_PUBLIC_LOAD_DATA_[1][1][i][4][0][1] == null) && (FB_PUBLIC_LOAD_DATA_[1][1][i][4][0][2] == 1)) {
-        questions_id.push("Long text");
+        status = "Long answer";
+        ans_props.push({"id":id, "status":status});
     }
     else {
-        questions_id.push(FB_PUBLIC_LOAD_DATA_[1][1][i][4][0][1])
+        for (var k = 0; k < FB_PUBLIC_LOAD_DATA_[1][1][i][4][0][1].length; k++) {
+            _ans.push(FB_PUBLIC_LOAD_DATA_[1][1][i][4][0][1][k][0]);
+        }
+        ans_props.push({"id" : id, "status" : _ans});
     }
 }
 
-console.log(questions_id)
+console.log(ans_props)
