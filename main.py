@@ -7,8 +7,8 @@ import requests
 LogManager = LogManager()
 import threading
 import click
+from bs4 import BeautifulSoup
 import json
-
 
 proxies = None
 
@@ -67,7 +67,15 @@ def StatusCode(*args, **kwargs):
     else:
         s = "Undefined"
         LogManager.error(f"[{res}] {s}")
- 
+
+def GetInput():
+    resp = requests.get("https://docs.google.com/forms/u/0/d/e/1FAIpQLSc9CFL6d7qKMJUzKl-FUGWONREe6y9PygPzDIVkeDSyU4-bpg/formResponse").text
+    
+    resp = resp[resp.find("var FB_PUBLIC_LOAD_DATA_ "):]
+    resp = resp[:resp.find(',"/forms"')]
+    
+    print(resp)
+                
 def raid(a, b, c, d, e:int):
     while True:
         r = requests.post(_link,
@@ -127,7 +135,7 @@ da_net = ["Да", "Нет"]
 genders = ['Agender', 'Androgyne', 'Androgynous', 'Bigender', 'Cis', 'FTM', 'Gender Fluid', 'Gender Nonconforming', 'Gender Questioning',
            'Gender Variant', 'Genderqueer', 'Neither', 'Neutrois', 'Non-binary', 'Other', 'Pangender', 'Two-spirit', 'Anongender', 'Cavusgender',
            'Zodiacgender', 'Aesthetgender', 'Affectugender', 'Digigender', 'Egogender']
-            
+             
 def sanya(a, b, c, vv:int):
     out = requests.post("https://docs.google.com/forms/u/0/d/e/1FAIpQLSc9CFL6d7qKMJUzKl-FUGWONREe6y9PygPzDIVkeDSyU4-bpg/formResponse",
                         data={
@@ -183,6 +191,8 @@ def starter(link, resp, raid):
             Response("headers", resp[7:])
         if "status" in resp and len(resp) != 6:
             StatusCode(resp[6:])
+        if resp == "input":
+            GetInput()
         if resp == "status":
             StatusCode()
         if raid == 1:
