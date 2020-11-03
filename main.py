@@ -69,7 +69,7 @@ def StatusCode(*args, **kwargs):
         LogManager.error(f"[{res}] {s}")
 
 def GetInput():
-    resp = requests.get("https://docs.google.com/forms/u/0/d/e/1FAIpQLSc9CFL6d7qKMJUzKl-FUGWONREe6y9PygPzDIVkeDSyU4-bpg/formResponse").text
+    resp = requests.get(_link).text
     
     resp = resp[resp.find("var FB_PUBLIC_LOAD_DATA_ "):]
     resp = resp[:resp.find(',"/forms"')]
