@@ -1,7 +1,10 @@
-var FB_PUBLIC_LOAD_DATA_ = [null,["Н.",[[963410975,"В каком вы классе:",null,3,[[447101162,[["8",null,null,null,0]
-,["9",null,null,null,0]
-,["10",null,null,null,0]
-,["11",null,null,null,0]
+var FB_PUBLIC_LOAD_DATA_ = [null,["Н.",[
+    [963410975,"В каком вы классе:",null,3,[
+    [447101162,[
+        ["8",null,null,null,0]//[1][1][0][4][1][0]
+,       ["9",null,null,null,0]
+,       ["10",null,null,null,0]//[1][1][0][4][1]                   [1][1][i][4][0][1]
+,       ["11",null,null,null,0]//[1][1][0][4][1][0][0]
 ]
 ,1,null,null,null,null,null,0]//[1][1][i][4][0][1] || [1][1][i][4][0][1][0][0]
 ]//[1][1][i][4][0][0]
@@ -144,31 +147,30 @@ var FB_PUBLIC_LOAD_DATA_ = [null,["Н.",[[963410975,"В каком вы клас
 ]
 ]
 
+var answers = [];
 
-
-var ans_props = [];
-var status = "FormatAnswer";
-var id = 0;
-var _ans = [];
-                              
-for (var i = 0; i < 12; i++) {
-    id = FB_PUBLIC_LOAD_DATA_[1][1][i][4][0][0];
-
-    if (((FB_PUBLIC_LOAD_DATA_[1][1][i][4][0][1] == null) && (FB_PUBLIC_LOAD_DATA_[1][1][i][4][0][2] == 1)) || 
-        ((FB_PUBLIC_LOAD_DATA_[1][1][i][4][0][1] == null) && (FB_PUBLIC_LOAD_DATA_[1][1][i][4][0][2] == 0))) {
-        status = "Long answer";
-        ans_props.push({"id":id, "status":status});
+FB_PUBLIC_LOAD_DATA_[1][1].forEach((element) => {
+    var temp = [];
+    // console.log(element[4][0][0])
+    // console.log(element[4][0][1])'
+    try {
+      element[4][0][1].forEach((ans) => {
+        temp.push(ans[0]);
+      });
+    } catch {
+      //pass
     }
-    else {
-        for (var k = 0; k < FB_PUBLIC_LOAD_DATA_[1][1][i][4][0][1].length; k++) {
-            _ans.push(FB_PUBLIC_LOAD_DATA_[1][1][i][4][0][1][k][0]);
-        }
-        ans_props.push({"id" : id, "status" : _ans});
-    }
+    // console.log(temp)
+    answers.push({
+      'id': element[4][0][0],
+      'value': temp
+    });
+  });
+
+for (var i = 0; i < answers.length; i++) {
+    if (answers[i]['value'].length == 0) {
+        answers[i]['value'] = "LongAnswer";
+    };
 }
 
-// for (var i = 0; i < FB_PUBLIC_LOAD_DATA_[1][1].length; i++) {
-//     console.log(FB_PUBLIC_LOAD_DATA_[1][1][i])
-// }
-
-console.log(ans_props)
+console.log(answers);
