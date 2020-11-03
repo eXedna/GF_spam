@@ -12,7 +12,6 @@ import threading
 import click
 import os
 import json
-import sys
 
                         #     "entry.447101162": "9",
                         #     "entry.1043893031": a,
@@ -43,6 +42,7 @@ import sys
                         # headers=headers,
                         # proxies = proxies)
 
+
 proxies = None
 
 headers = {
@@ -58,6 +58,9 @@ _third_answer_ = 'Если вы дочитали до этого момента,
 random_num = [1, 5]
 
 _link = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfSA182h4jGDBIOcfyMgxeorPUokkb26QS4KZtMpB5H6O3ZcA/formResponse"
+
+print(requests.get(_link).text)
+
 
 jojo = random.choice(random_num)
 
