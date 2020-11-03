@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from typing import Set
 import requests
 import random
 from LogPython import LogManager
@@ -7,8 +8,6 @@ import requests
 LogManager = LogManager()
 import threading
 import click
-from bs4 import BeautifulSoup
-import json
 
 proxies = None
 
@@ -75,6 +74,15 @@ def GetInput():
     resp = resp[:resp.find(',"/forms"')]
     
     print(resp)
+    
+def SetInput():
+    resp = requests.get(_link).text
+    resp = resp[resp.find("var FB_PUBLIC_LOAD_DATA_ "):]
+    resp = resp[:resp.find(',"/forms"')]
+    
+    LogManager.info('writing complete')
+    
+    open('dop.js', 'w', encoding = "utf-8").write("module.exports.Getter = function Getter() {" + resp + "]" + "\nreturn FB_PUBLIC_LOAD_DATA_;}")
                 
 def raid(a, b, c, d, e:int):
     while True:
@@ -191,8 +199,10 @@ def starter(link, resp, raid):
             Response("headers", resp[7:])
         if "status" in resp and len(resp) != 6:
             StatusCode(resp[6:])
-        if resp == "input":
+        if resp == "get_input":
             GetInput()
+        if resp == "set_input":
+            SetInput();
         if resp == "status":
             StatusCode()
         if raid == 1:
