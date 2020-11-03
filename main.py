@@ -101,43 +101,52 @@ def StatusCode(*args, **kwargs):
         s = "Undefined"
         LogManager.error(f"[{res}] {s}")
 
+respG = open("inf.txt", "r", encoding="utf-8").readline()
+respG = json.loads(respG)
+
+def InputUpdater():
+    for r in respG:
+        r['id'] = 'entry.' + str(r['id'])
+                
+    return respG 
+
 def GetInput():
     
-    os.system("node main.js")
-    
-    resp = open("inf.txt", "r", encoding="utf-8").readline()
-    
-    resp = json.loads(resp)
-    
-    for r in resp:
-        r['id'] = 'entry.' + str(r['id'])
-        
-    return resp    
-            
-res = dict()
-
-        
+    os.system("node main.js")  
+                        
 def SetInput(a):
     resp = requests.get(a).text
     resp = resp[resp.find("var FB_PUBLIC_LOAD_DATA_ "):]
     resp = resp[:resp.find(',"/forms"')]
-    
+                 
     LogManager.info('writing complete')
     
     open('dop.js', 'w', encoding = "utf-8").write("module.exports.Getter = function Getter() {\n" + resp + "]" + "\nreturn FB_PUBLIC_LOAD_DATA_;}")
-                
-def raid(a, b, c, d, e:int):
-    for i in GetInput():
+        
+def RaidComporator():
+    res = dict()
+    
+    jojo = InputUpdater()
+
+    for i in jojo:
         res[i['id']] = random.choice(i['value'])
         
     res["fvv"] = "1"
     res["draftResponse"] = '[null,null,"-1322386903815409528"]'
     res["pageHistory"] = "0"
-    res["fbzx"] = "-1322386903815409528"
-    
+    res["fbzx"] = "-1322386903815409528"    
+                  
+    return res
+        
+try:
+     RaidReqList = RaidComporator()
+except:
+    LogManager.error("Стоп насилию")             
+                  
+def raid(a, b, c, d, e:int):  
     while True:
         r = requests.post(_link, 
-                          data = res,
+                          data = RaidReqList,
                           headers = headers,
                           proxies = proxies)
         

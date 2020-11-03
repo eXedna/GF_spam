@@ -20,11 +20,17 @@ FB_PUBLIC_LOAD_DATA_[1][1].forEach((element) => {
     });
   });
 
-for (let i = 0; i < answers.length; i++) {
-    if (answers[i]['value'].length == 0) {
-        answers[i]['value'] = "LongAnswer";
-    };
-}
+  for (val of answers) {
+    if (!Array.isArray(val.value) || !val.value.length) {
+      if (val.value == null) {
+        val.value = " ";
+        continue;
+      }
+      val.value = "LongAnswer";
+    } else {
+      answers.push({ id: val.id + "_sentinel", value: null });
+    }
+  }
 
 console.log(answers);
 
