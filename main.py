@@ -82,7 +82,7 @@ def SetInput():
     
     LogManager.info('writing complete')
     
-    open('dop.js', 'w', encoding = "utf-8").write("module.exports.Getter = function Getter() {" + resp + "]" + "\nreturn FB_PUBLIC_LOAD_DATA_;}")
+    open('dop.js', 'w', encoding = "utf-8").write("module.exports.Getter = function Getter() {\n" + resp + "]" + "\nreturn FB_PUBLIC_LOAD_DATA_;}")
                 
 def raid(a, b, c, d, e:int):
     while True:
