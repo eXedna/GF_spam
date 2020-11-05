@@ -36,7 +36,7 @@ _third_answer_ = 'Если вы дочитали до этого момента,
 
 random_num = [1, 5]
 
-_link = 'https://docs.google.com/forms/d/1dY2zdiwg86Yq-yyKHGX1SovfDY_W9oUHfWUKma24_N0/viewform?edit_requested=true'
+_link = 'https://docs.google.com/forms/d/e/1FAIpQLSc9CFL6d7qKMJUzKl-FUGWONREe6y9PygPzDIVkeDSyU4-bpg/viewform'
 
 jojo = random.choice(random_num)
 
@@ -108,25 +108,8 @@ except:
 def InputUpdater():
     for r in respG:
         r['id'] = 'entry.' + str(r['id'])
-      
-    for i in respG:  
-                   
-        fio = random.choice(Identities.random_surnames()) + ' '\
-            + random.choice(Identities.random_names()) + ' '\
-            + random.choice(Identities.random_patronymic())             
-                   
-        if i['value'] == 'LongAnswer':
-            
-            _ = input(f"{i['quest']}\n Enter long answer: ")
-            
-            if _ == 'fio':
-                i['value'] = fio
-            else:
-                i['value'] = _
                 
     return respG 
-
-InputUpdater()
 
 def LongChecker():
     _ = InputUpdater()
@@ -137,8 +120,8 @@ def LongChecker():
 
 def GetInput():
     
-    os.system("node main.js")  
-                        
+    os.system("node main.js")
+                            
 def SetInput(a):
     resp = requests.get(a).text
     resp = resp[resp.find("var FB_PUBLIC_LOAD_DATA_ "):]
@@ -170,12 +153,23 @@ def OtherArgsGetter():
     }).attrs['value']
     
     return fvv, draftResponse, pageHistory, fbzx
+
         
-def RaidComporator(ServeList):
+        
+def RaidComporator(ServerList):
     res = dict()
+    f = open('LongAns.txt', 'r', encoding="utf-8").readline()
+    f = f.replace("'", '"')
     
-    for i in ServeList:
-        res[i['id']] = random.choice(i['value'])                                                                            
+    _f = json.loads(f)
+        
+    for i in ServerList:
+        if i['value'] == 'LongAnswer':
+            for l in _f:
+                if i['id'] == l['id']:
+                    res[i['id']] = l['value']
+        else:
+            res[i['id']] = random.choice(i['value'])                                                                            
       
     fvv, draftResponse, pageHistory, fbzx = OtherArgsGetter()
         
@@ -185,12 +179,42 @@ def RaidComporator(ServeList):
     res["fbzx"] = fbzx   
                   
     return res          
-                  
+     
+def AnsSetter():
+    _ = InputUpdater()
+    
+    res = list()
+    
+    for i in _:  
+        
+        _t = dict()
+                   
+        fio = random.choice(Identities.random_surnames()) + " "\
+            + random.choice(Identities.random_names()) + " "\
+            + random.choice(Identities.random_patronymic())             
+                   
+        if i['value'] == 'LongAnswer':
+            
+            j = input(f"{i['quest']}\n Enter long answer: ")
+            
+            if j == 'fio':
+                _t["id"] = i["id"][6:]
+                _t["value"] = fio
+            else:
+                _t["id"] = i["id"][6:]
+                _t["value"] = j  
+                
+            res.append(_t)
+            
+    kk = open("LongAns.txt", "w")
+    kk.write(str(res))
+      
 jojo = InputUpdater()
-                  
+                                
 def raid(a, b, c, d, e:int):
         
     for i in range(100):
+    
         RaidReqList = RaidComporator(jojo)
                 
         # r = requests.post(_link, 
@@ -223,7 +247,8 @@ genders = ['Agender', 'Androgyne', 'Androgynous', 'Bigender', 'Cis', 'FTM', 'Gen
 @click.option('--resp', default = "text", help = "Get response || Post response")
 @click.option('--log', default = "jojo", help = "Any actions with logs")
 @click.option('--test', default = "OK", help = "For testing commands")
-def starter(link, resp, raid, log, test):                                              
+@click.option('--input', default = "pidor", help = "Enter long answers")
+def starter(link, resp, raid, log, test, input):                                              
     
     """Google Form`s ddoser script`s help`s command:\\//"""
     
@@ -259,6 +284,8 @@ def starter(link, resp, raid, log, test):
         if log == "get":
             for i in LogManager.get_logs(int(input("Enter quantity of logs: ")))[0]:
                 print(i, end ="")
+        if input == "set":
+            AnsSetter()
         if test == "jojo":
             LongChecker()
         if raid == 1:
