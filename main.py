@@ -6,7 +6,6 @@ import random
 
 from LogPython import LogManager
 from bs4 import BeautifulSoup
-import requests
 LogManager = LogManager()
 import threading
 import click
@@ -229,7 +228,7 @@ def starter(link, resp, raid, log, test):
             with open("LogPython_info.log", "w") as log_file:
                 log_file.write(" ")
         if test == "jojo":
-            Test()
+            LogManager.warning("No completed")
         if raid == 1:
 
             print('\033[36m' + '          _____                    _____                    _____                    _____                    _____                    _____     _____  ')
