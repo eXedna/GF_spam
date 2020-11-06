@@ -175,7 +175,14 @@ def RaidComporator(ServerList):
     res["fbzx"] = fbzx   
                   
     return res          
-     
+
+def GetFio():
+    fio = random.choice(Identities.random_surnames()) + " "\
+        + random.choice(Identities.random_names()) + " "\
+        + random.choice(Identities.random_patronymic())
+
+    return fio
+
 def AnsSetter():
     _ = InputUpdater()
     
@@ -184,9 +191,7 @@ def AnsSetter():
     for i in _:  
         _t = dict()
                    
-        fio = random.choice(Identities.random_surnames()) + " "\
-            + random.choice(Identities.random_names()) + " "\
-            + random.choice(Identities.random_patronymic())             
+        fio = GetFio()            
                    
         if i['value'] == 'LongAnswer':
             
