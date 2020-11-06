@@ -1,15 +1,12 @@
-try:
-    import perem
-except:
-    from ShG_rand import perem
-    """File no-main called"""
+
+from ShG_rand import perem
 
 import random
 
 import requests
 from bs4 import BeautifulSoup
 
-def random_names():
+def random_names(*args):
     resp = requests.get("https://kakzovut.ru/man.html").text
     _soup = BeautifulSoup(resp, "lxml")
 
@@ -23,9 +20,20 @@ def random_names():
         
         res.append(str(i)[_st + 7:_end])
         
-    return res
+    resp = requests.get("https://imena-znachenie.ru/imena/polskie/").text
+    _soup = BeautifulSoup(resp, "lxml")
+    
+    
         
-def random_surnames():
+    if len(args) == 0:
+        
+        return res
+    
+    else:
+        
+        return random.choice(res)
+        
+def random_surnames(*args):
     resp = requests.get("http://imja.name/familii/pyatsot-chastykh-familij.shtml").text
     _soup = BeautifulSoup(resp, "lxml")
     
@@ -42,8 +50,12 @@ def random_surnames():
           
     res.sort(key = lambda x: x[0])
     res.remove(res[0]) 
-                    
-    return res
+    
+    if len(args) == 0:
+        return res
+    else:
+        
+        return random.choice(res)
         
 def random_patronymic():
     resp = requests.get("https://surnameonline.ru/patronymic-male.html").text

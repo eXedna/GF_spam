@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from json.decoder import JSONDecodeError
+from re import I
 import requests
 import random
 from ShG_rand import Identities     
@@ -32,7 +33,7 @@ headers = {
 
 random_num = [1, 5]
 
-_link = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSfPb7vmuOgRdIPLdS2hrEc7CiH-hu8sJZQpc56dRu6aVvMKTQ/formResponse'
+_link = 'https://forms.gle/tcx52iAwShSWFfE36'
 
 jojo = random.choice(random_num)
 
@@ -165,6 +166,10 @@ def RaidComporator(ServerList):
                 if i['id'] == l['id']:
                     if l['value'] == 'fio':
                         res[i['id']] = Identities.FIO()
+                    elif l['value'] == 'name':
+                        res[i['id']] = Identities.random_names("да")
+                    elif l['value'] == 'surname':
+                        res[i['id']] = Identities.random_surnames("поработай на работе")
                     else:
                         res[i['id']] = l['value']
         else:
@@ -205,27 +210,24 @@ jojo = InputUpdater()
                                 
 def raid(e:int):
         
-    for i in range(100):
+    for i in range(250):
         
-
         RaidReqList = RaidComporator(jojo)
                 
         r = requests.post(_link, 
                           data = RaidReqList,
                           headers = headers,
-                          proxies = None)
+                          proxies = None)                               
                 
         if r.status_code == 200:
             status = "OK"
-            LogManager.info(f"{r} === {e + 1} || {i + 1} === {status} === {RaidReqList['entry.1100544887']}")
+            LogManager.info(f"{r} === {e + 1} || {i + 1} === {status}")
         elif r.status_code == 405 or r.status_code == 404 or r.status_code == 429:
             status = responses[r.status_code]
             LogManager.warning(f"{r} === {e + 1} || {i + 1} === {status}")
         else:
             status = responses[r.status_code]
             LogManager.error(f"{r} === {e + 1} || {i + 1} === {status}")
-
-da_net = ["Да", "Нет"]
 
 @click.command()
 @click.option('--link', default = True, help = 'Show raiding link')
@@ -312,12 +314,13 @@ def start1():
     _ = list()
     
     for i in range(10):
-        # raid(i)
         thr = threading.Thread(target = raid, args = [i], daemon = True)
         thr.start()    
         _.append(thr)
         
     [t.join() for t in _]    
+        
+    # LogManager.warning("Raid log out")
         
         # raid(_first_answer_, _second_answer_, _third_answer_, jojo, i)
       
