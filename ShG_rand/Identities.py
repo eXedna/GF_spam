@@ -1,3 +1,5 @@
+import random
+
 import requests
 from bs4 import BeautifulSoup
 
@@ -51,6 +53,13 @@ def random_patronymic():
         res.append(str(i)[_st + 6: _end])
         
     return res
+
+def FIO():
+    fio = random.choice(random_surnames()) + " "\
+        + random.choice(random_names()) + " "\
+        + random.choice(random_patronymic())
+
+    return fio
 
 def jojo():
     headers = {

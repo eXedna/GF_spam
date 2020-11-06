@@ -163,7 +163,10 @@ def RaidComporator(ServerList):
         if i['value'] == 'LongAnswer':
             for l in _f:
                 if i['id'] == l['id']:
-                    res[i['id']] = l['value']
+                    if l['value'] == 'fio':
+                        res[i['id']] = Identities.FIO()
+                    else:
+                        res[i['id']] = l['value']
         else:
             res[i['id']] = random.choice(i['value'])                                                                            
       
@@ -176,13 +179,6 @@ def RaidComporator(ServerList):
                   
     return res          
 
-def GetFio():
-    fio = random.choice(Identities.random_surnames()) + " "\
-        + random.choice(Identities.random_names()) + " "\
-        + random.choice(Identities.random_patronymic())
-
-    return fio
-
 def AnsSetter():
     _ = InputUpdater()
     
@@ -191,19 +187,15 @@ def AnsSetter():
     for i in _:  
         _t = dict()
                    
-        fio = GetFio()            
+        fio = Identities.FIO()            
                    
         if i['value'] == 'LongAnswer':
             
             j = input(f"{i['quest']}\n Enter long answer: ")
             
-            if j == 'fio':
-                _t["id"] = i["id"][6:]
-                _t["value"] = fio
-            else:
-                _t["id"] = i["id"][6:]
-                _t["value"] = j  
-                
+            _t["id"] = i["id"][6:]
+            _t["value"] = j
+            
             res.append(_t)
             
     kk = open("LongAns.txt", "w")
@@ -249,6 +241,7 @@ def starter(link, resp, raid, log, test, _input):
     # try:
     if link == "get":
         print("______  __    ______        \n___  / / /_______  /_______\n__  /_/ /_  _ \_  /___  __ \"\n_  __  / /  __/  / __  /_/ /\n/_/ /_/  \___//_/  _  .___/ \n                   /_/      \n")
+        print(str(BeautifulSoup(requests.get(_link).text, "lxml").title).replace("title", '').replace("<", '').replace(">", '').replace("/", "") + ' :')
         print(_link)
     if link == "set":
         print("______  __    ______        \n___  / / /_______  /_______\n__  /_/ /_  _ \_  /___  __ \"\n_  __  / /  __/  / __  /_/ /\n/_/ /_/  \___//_/  _  .___/ \n                   /_/      \n")
