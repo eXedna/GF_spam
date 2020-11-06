@@ -320,7 +320,7 @@ def start1():
         
     [t.join() for t in _]    
         
-    # LogManager.warning("Raid log out")
+    LogManager.warning("Raid log out")
         
         # raid(_first_answer_, _second_answer_, _third_answer_, jojo, i)
       
