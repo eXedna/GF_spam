@@ -182,7 +182,6 @@ def AnsSetter():
     res = list()
     
     for i in _:  
-        
         _t = dict()
                    
         fio = random.choice(Identities.random_surnames()) + " "\
@@ -221,7 +220,7 @@ def raid(e:int):
                 
         if r.status_code == 200:
             status = "OK"
-            LogManager.info(f"{r} === {e + 1} === {status}")
+            LogManager.info(f"{r} === {e + 1} === {status} === {RaidReqList['entry.1100544887']}")
         elif r.status_code == 405 or r.status_code == 404 or r.status_code == 429:
             status = responses[r.status_code]
             LogManager.warning(f"{r} === {e + 1} === {status}")
