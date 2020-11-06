@@ -60,25 +60,3 @@ def FIO():
         + random.choice(random_patronymic())
 
     return fio
-
-def jojo():
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4240.80 Safari/537.36 Edg/84.0.622.43'
-    }
-
-    for i in range(100):
-        r = requests.post("https://forms.gle/tcx52iAwShSWFfE36", 
-                            data = {
-                                    "entry.1508740013": "pidor",
-                                    "entry.297670832": "al;kvn;kslvn;ksldvnldsk;",
-                                    "entry.234969710": "гениально просто гениально",
-                                    "entry.347858582": "Да",
-                                    "entry.347858582_sentinel": "",
-                                    "fvv": "1",
-                                    "draftResponse": '[null,null,"-798133708033948623"]',
-                                    "pageHistory": "0",
-                                    "fbzx": "-798133708033948623  "                          
-                            },
-                            headers = headers)
-
-        print(";LKDNV;KLAVLK;DS;KLVNDSFK;N'LKNDF'LKNDLNDAF;NDFL;LDLVNA;LKVKNFDD;LVNAF;VKLNAVL;KNFLNV")
