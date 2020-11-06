@@ -217,13 +217,13 @@ def raid(e:int):
                 
         if r.status_code == 200:
             status = "OK"
-            LogManager.info(f"{r} === {e + 1} === {status} === {RaidReqList['entry.1100544887']}")
+            LogManager.info(f"{r} === {e + 1} || {i + 1} === {status} === {RaidReqList['entry.1100544887']}")
         elif r.status_code == 405 or r.status_code == 404 or r.status_code == 429:
             status = responses[r.status_code]
-            LogManager.warning(f"{r} === {e + 1} === {status}")
+            LogManager.warning(f"{r} === {e + 1} || {i + 1} === {status}")
         else:
             status = responses[r.status_code]
-            LogManager.error(f"{r} === {e + 1} === {status}")
+            LogManager.error(f"{r} === {e + 1} || {i + 1} === {status}")
 
 da_net = ["Да", "Нет"]
 
@@ -268,6 +268,8 @@ def starter(link, resp, raid, log, test, _input):
     if log == "cls":
         with open("LogPython_info.log", "w") as log_file:
             log_file.write(" ")
+
+        LogManager.info("Cleaning complete [+]")
     if log == "get":
         for i in LogManager.get_logs(int(input("Enter quantity of logs: ")))[0]:
             print(i, end ="")
@@ -311,7 +313,7 @@ def start1():
     
     for i in range(10):
         # raid(i)
-        thr = threading.Thread(target = raid, args = [i], daemon = False)
+        thr = threading.Thread(target = raid, args = [i], daemon = True)
         thr.start()    
         _.append(thr)
         

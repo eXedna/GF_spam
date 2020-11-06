@@ -1,3 +1,9 @@
+try:
+    import perem
+except:
+    from ShG_rand import perem
+    """File no-main called"""
+
 import random
 
 import requests
@@ -60,3 +66,8 @@ def FIO():
         + random.choice(random_patronymic())
 
     return fio
+
+def AnimeNames():
+    res = random.choice(perem.anime_list)
+    
+    return res
