@@ -136,7 +136,7 @@ def OtherArgsGetter():
     fvv = soup.find("input", {
         "name" : "fvv"
     }).attrs['value']
-    
+               
     draftResponse = soup.find("input", {
         "name" :"draftResponse"
     }).attrs['value']

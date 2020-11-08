@@ -1,8 +1,12 @@
-ans = 0
-n = float(input())
+import requests
+from bs4 import BeautifulSoup
+from LogPython import LogManager
 
-while n > 1:
-    ans += 1
-    n = n/2
-    
-print(ans)
+resp = requests.get("https://start.bizon365.ru/room/16650/bachelorsmeeting?utm_source=&utm_medium=&utm_campaign=&utm_term=&utm_content=").text
+_soup = BeautifulSoup(resp, "lxml")
+
+print(_soup.title)
+
+res = _soup.find_all("li")
+
+print(res)
