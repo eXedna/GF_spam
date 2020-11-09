@@ -24,15 +24,10 @@ def random_names(*args):
         
     resp = requests.get("https://imena-znachenie.ru/imena/polskie/").text
     _soup = BeautifulSoup(resp, "lxml")
-    
-    
         
     if len(args) == 0:
-        
         return res
-    
     else:
-        
         return random.choice(res)
         
 def random_surnames(*args):

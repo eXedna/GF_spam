@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from requests.api import post
 from ShG_rand.Identities import RandomRes
 from json.decoder import JSONDecodeError
 from re import I
@@ -34,11 +35,7 @@ headers = {
 
 random_num = [1, 5]
 
-<<<<<<< HEAD
 _link = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSc6I2ywg_Nl_Aot3lFt1FdPnft0xS5ea62MjVpsGFe76webXQ/formResponse'
-=======
-_link = 'https://docs.google.com/forms/d/e/1FAIpQLSc6I2ywg_Nl_Aot3lFt1FdPnft0xS5ea62MjVpsGFe76webXQ/formResponse'
->>>>>>> 040bada8a631bd1c727a29dbd8ebd87c457faaa1
 
 jojo = random.choice(random_num)
 
@@ -159,6 +156,8 @@ def OtherArgsGetter():
 jojo = InputUpdater()
 
 def RaidServe(ServerList):
+    """I`m not sure ):"""
+    
     _res = dict()
     
     f = open('LongAns.txt', 'r').readline()
@@ -177,11 +176,12 @@ def RaidServe(ServerList):
 
     f.write(str(_res))
         
-def RaidComporator(ServerList):
+def RaidComporator(ServerList, *args):
     res = dict()
     f = open('LongAns.txt', 'r').readline()
     f = f.replace("'", '"')
     
+    postfix = "@hidbell.ru"
     _f = json.loads(f)
         
     for i in ServerList:
@@ -198,7 +198,7 @@ def RaidComporator(ServerList):
                         res[i['id']] = Identities.Genders()
                     elif l['value'] == 'name':
                         res[i['id']] = Identities.random_names("да")
-                    elif l['value'] == 'surname':
+                    elif l['value'] == 'surname': 
                         res[i['id']] = Identities.random_surnames("поработай на работе")
                     else:
                         res[i['id']] = l['value']
@@ -206,8 +206,10 @@ def RaidComporator(ServerList):
             res[i['id']] = random.choice(i['value'])                                                                            
       
     fvv, draftResponse, pageHistory, fbzx = OtherArgsGetter()
-     
-    res['emailAddress'] = "sosat@hidbell.ru"  
+      
+    if len(args) != 0:
+        res['emailAddress'] = ' ' + postfix  
+    
     res["fvv"] = fvv
     res["draftResponse"] = draftResponse
     res["pageHistory"] = pageHistory
@@ -254,6 +256,10 @@ def raid(e:int):
         elif r.status_code == 405 or r.status_code == 404 or r.status_code == 429:
             status = responses[r.status_code]
             LogManager.warning(f"{r} === {e + 1} || {i + 1} === {status}")
+        elif r.status_code == 400:
+            if i != 0:
+                RaidReqList = RaidComporator(jojo)
+            RaidReqList = RaidComporator(jojo, "код красный")
         else:
             status = responses[r.status_code]
             LogManager.error(f"{r} === {e + 1} || {i + 1} === {status}")
