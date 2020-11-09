@@ -31,7 +31,7 @@ def ReReplacePerem(file, obj : str, new : str):
     regex = r"{}\s*\=\s*(.*)".format(obj)
     r = re.search(regex, current).group(1)
     
-    current = current.replace(r, new)
+    current = current.replace(r, new, 1)
     
     f = open(file, "w", encoding = "utf-8")
     

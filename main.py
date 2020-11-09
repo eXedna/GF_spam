@@ -176,7 +176,7 @@ def RaidServe(ServerList):
 
     f.write(str(_res))
         
-def RaidComporator(ServerList, *args):
+def RaidComporator(ServerList, arg):
     res = dict()
     f = open('LongAns.txt', 'r').readline()
     f = f.replace("'", '"')
@@ -191,7 +191,7 @@ def RaidComporator(ServerList, *args):
                     if l['value'] == 'fio':
                         res[i['id']] = Identities.FIO()
                     elif l['value'] == 'fi':
-                        res[i['id']] = Identities.random_surnames("конечно зафиксирую") + Identities.random_names("ладно")
+                        res[i['id']] = Identities.random_surnames("конечно зафиксирую") + ' ' + Identities.random_names("ладно")
                     elif l['value'] == "default":
                         res[i['id']] = SpamModules.RandomRes(100)
                     elif l['value'] == "gen":
@@ -200,21 +200,21 @@ def RaidComporator(ServerList, *args):
                         res[i['id']] = Identities.random_names("да")
                     elif l['value'] == 'surname': 
                         res[i['id']] = Identities.random_surnames("поработай на работе")
-                    else:
+                    else:                               
                         res[i['id']] = l['value']
         else:
             res[i['id']] = random.choice(i['value'])                                                                            
       
     fvv, draftResponse, pageHistory, fbzx = OtherArgsGetter()
       
-    if len(args) != 0:
+    if arg == 1 or arg == '1':
         res['emailAddress'] = Identities.random_eng_names("5 минут, полет нормальный") + postfix  
     
     res["fvv"] = fvv
     res["draftResponse"] = draftResponse
     res["pageHistory"] = pageHistory
     res["fbzx"] = fbzx   
-                  
+                      
     return res          
 
 def AnsSetter():
@@ -243,8 +243,8 @@ def raid(e:int):
         
     for i in range(250):
         
-        RaidReqList = RaidComporator(jojo)
-                
+        RaidReqList = RaidComporator(jojo, 1)
+                        
         r = requests.post(_link, 
                           data = RaidReqList,
                           headers = headers,
@@ -258,9 +258,10 @@ def raid(e:int):
             LogManager.warning(f"{r} === {e + 1} || {i + 1} === {status}")
         elif r.status_code == 400:
             if i != 0:
-                utils.ReReplacePerem(__file__, "RaidReqList", "RaidComporator(jojo)")
+                utils.ReReplacePerem(__file__, "RaidReqList", "RaidComporator(jojo, 1)")
+                LogManager.info(RaidReqList['emailAddress'])
             else:
-                utils.ReReplacePerem(__file__, "RaidReqList", "RaidComporator(jojo)")
+                utils.ReReplacePerem(__file__, "RaidReqList", "RaidComporator(jojo, 0)")
         else:
             status = responses[r.status_code]
             LogManager.error(f"{r} === {e + 1} || {i + 1} === {status}")
@@ -356,9 +357,9 @@ def start1():
         
     [t.join() for t in _]    
         
+    # raid(i)
+    
     LogManager.warning("Raid log out")
-        
-        # raid(_first_answer_, _second_answer_, _third_answer_, jojo, i)
       
 if __name__ == "__main__":  
     
