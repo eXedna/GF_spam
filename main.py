@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from requests.api import post
 from ShG_rand.Identities import RandomRes
 from json.decoder import JSONDecodeError
-from re import I
 import requests
 import random
-from ShG_rand import Identities     
+from ShG_rand import Identities  
+from ShG_rand import utils   
+from ShG_rand import SpamModules
 
 from LogPython import LogManager
 from bs4 import BeautifulSoup
@@ -170,7 +170,7 @@ def RaidServe(ServerList):
             for l in _f:
                 if i['id'] == l['id']:
                     if l['value'] == 'default':
-                        _res[i['id']] == RandomRes(int(input(f"({i['quest']}) Enter fixed random quantity : ")))
+                        _res[i['id']] == SpamModules.RandomRes(int(input(f"({i['quest']}) Enter fixed random quantity : ")))
                         
     f = open("DopList.txt", "w", encoding = "utf-8")     
 
@@ -193,9 +193,9 @@ def RaidComporator(ServerList, *args):
                     elif l['value'] == 'fi':
                         res[i['id']] = Identities.random_surnames("конечно зафиксирую") + Identities.random_names("ладно")
                     elif l['value'] == "default":
-                        res[i['id']] = Identities.RandomRes(100)
+                        res[i['id']] = SpamModules.RandomRes(100)
                     elif l['value'] == "gen":
-                        res[i['id']] = Identities.Genders()
+                        res[i['id']] = SpamModules.Genders()
                     elif l['value'] == 'name':
                         res[i['id']] = Identities.random_names("да")
                     elif l['value'] == 'surname': 
@@ -258,8 +258,9 @@ def raid(e:int):
             LogManager.warning(f"{r} === {e + 1} || {i + 1} === {status}")
         elif r.status_code == 400:
             if i != 0:
-                RaidReqList = RaidComporator(jojo)
-            RaidReqList = RaidComporator(jojo, "код красный")
+                utils.ReReplacePerem("RaidReqList", "RaidComporator(jojo)")
+            else:
+                utils.ReReplacePerem("RaidReqList", "RaidComporator(jojo, 'код красный')")
         else:
             status = responses[r.status_code]
             LogManager.error(f"{r} === {e + 1} || {i + 1} === {status}")
