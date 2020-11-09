@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from ShG_rand.Identities import RandomRes
 from json.decoder import JSONDecodeError
 from re import I
 import requests
@@ -33,7 +34,7 @@ headers = {
 
 random_num = [1, 5]
 
-_link = 'https://forms.gle/tcx52iAwShSWFfE36'
+_link = 'https://docs.google.com/forms/d/e/1FAIpQLSc6I2ywg_Nl_Aot3lFt1FdPnft0xS5ea62MjVpsGFe76webXQ/formResponse'
 
 jojo = random.choice(random_num)
 
@@ -151,7 +152,26 @@ def OtherArgsGetter():
     
     return fvv, draftResponse, pageHistory, fbzx
 
-        
+jojo = InputUpdater()
+
+def RaidServe(ServerList):
+    _res = dict()
+    
+    f = open('LongAns.txt', 'r').readline()
+    f = f.replace("'", '"')
+    
+    _f = json.loads(f)
+    
+    for i in ServerList:
+        if i['value'] == 'LongAnswer':
+            for l in _f:
+                if i['id'] == l['id']:
+                    if l['value'] == 'default':
+                        _res[i['id']] == RandomRes(int(input(f"({i['quest']}) Enter fixed random quantity : ")))
+                        
+    f = open("DopList.txt", "w", encoding = "utf-8")     
+
+    f.write(str(_res))
         
 def RaidComporator(ServerList):
     res = dict()
@@ -166,6 +186,12 @@ def RaidComporator(ServerList):
                 if i['id'] == l['id']:
                     if l['value'] == 'fio':
                         res[i['id']] = Identities.FIO()
+                    elif l['value'] == 'fi':
+                        res[i['id']] = Identities.random_surnames("конечно зафиксирую") + Identities.random_names("ладно")
+                    elif l['value'] == "default":
+                        res[i['id']] = Identities.RandomRes(100)
+                    elif l['value'] == "gen":
+                        res[i['id']] = Identities.Genders()
                     elif l['value'] == 'name':
                         res[i['id']] = Identities.random_names("да")
                     elif l['value'] == 'surname':
@@ -176,7 +202,8 @@ def RaidComporator(ServerList):
             res[i['id']] = random.choice(i['value'])                                                                            
       
     fvv, draftResponse, pageHistory, fbzx = OtherArgsGetter()
-        
+     
+    res['emailAddress'] = "sosat@hidbell.ru"  
     res["fvv"] = fvv
     res["draftResponse"] = draftResponse
     res["pageHistory"] = pageHistory
@@ -205,8 +232,6 @@ def AnsSetter():
             
     kk = open("LongAns.txt", "w")
     kk.write(str(res))
-      
-jojo = InputUpdater()
                                 
 def raid(e:int):
         
