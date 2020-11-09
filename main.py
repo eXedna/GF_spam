@@ -92,7 +92,7 @@ def StatusCode(*args, **kwargs):
             status = responses[r.status_code]
             LogManager.warning(f"{r} === {status}")
         else:
-            status = responses[r.status_code]
+            status = responses[r.status_code]   
             LogManager.error(f"{r} === {status}")
 
 try:
@@ -154,27 +154,6 @@ def OtherArgsGetter():
     return fvv, draftResponse, pageHistory, fbzx
 
 jojo = InputUpdater()
-
-def RaidServe(ServerList):
-    """I`m not sure ):"""
-    
-    _res = dict()
-    
-    f = open('LongAns.txt', 'r').readline()
-    f = f.replace("'", '"')
-    
-    _f = json.loads(f)
-    
-    for i in ServerList:
-        if i['value'] == 'LongAnswer':
-            for l in _f:
-                if i['id'] == l['id']:
-                    if l['value'] == 'default':
-                        _res[i['id']] == SpamModules.RandomRes(int(input(f"({i['quest']}) Enter fixed random quantity : ")))
-                        
-    f = open("DopList.txt", "w", encoding = "utf-8")     
-
-    f.write(str(_res))
         
 def RaidComporator(ServerList, arg):
     res = dict()
@@ -383,7 +362,7 @@ def start1():
     i = 123
     _ = list()
     
-    for i in range(30):
+    for i in range(10):
         thr = threading.Thread(target = raid, args = [i], daemon = True)
         thr.start()    
         _.append(thr)
