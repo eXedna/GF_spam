@@ -2,6 +2,7 @@ from ShG_rand import perem
 from bs4 import BeautifulSoup
 import requests
 import random
+from ShG_rand import Identities
 
 def Genders(*args):
     res = perem.genders
@@ -56,7 +57,7 @@ def RandomWords(*args):
 def RandomRes(qan = 5):
     gl_list = list()
     
-    for i in AnimeNames():
+    for i in Identities.AnimeNames():
         gl_list.append(i)
         
     for k in Genders():

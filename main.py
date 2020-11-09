@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from ShG_rand.Identities import RandomRes
+from ShG_rand.SpamModules import RandomRes
 from json.decoder import JSONDecodeError
 import requests
 import random
@@ -195,7 +195,7 @@ def RaidComporator(ServerList, *args):
                     elif l['value'] == "default":
                         res[i['id']] = SpamModules.RandomRes(100)
                     elif l['value'] == "gen":
-                        res[i['id']] = SpamModules.Genders()
+                        res[i['id']] = SpamModules.Genders("помянем")
                     elif l['value'] == 'name':
                         res[i['id']] = Identities.random_names("да")
                     elif l['value'] == 'surname': 
@@ -208,7 +208,7 @@ def RaidComporator(ServerList, *args):
     fvv, draftResponse, pageHistory, fbzx = OtherArgsGetter()
       
     if len(args) != 0:
-        res['emailAddress'] = ' ' + postfix  
+        res['emailAddress'] = Identities.random_eng_names("5 минут, полет нормальный") + postfix  
     
     res["fvv"] = fvv
     res["draftResponse"] = draftResponse
@@ -258,9 +258,9 @@ def raid(e:int):
             LogManager.warning(f"{r} === {e + 1} || {i + 1} === {status}")
         elif r.status_code == 400:
             if i != 0:
-                utils.ReReplacePerem("RaidReqList", "RaidComporator(jojo)")
+                utils.ReReplacePerem(__file__, "RaidReqList", "RaidComporator(jojo)")
             else:
-                utils.ReReplacePerem("RaidReqList", "RaidComporator(jojo, 'код красный')")
+                utils.ReReplacePerem(__file__, "RaidReqList", "RaidComporator(jojo)")
         else:
             status = responses[r.status_code]
             LogManager.error(f"{r} === {e + 1} || {i + 1} === {status}")

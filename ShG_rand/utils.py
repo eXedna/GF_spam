@@ -2,8 +2,8 @@ import re
 
 test = "Кстати говоря, работает" 
 
-def ReReplaceString(obj : str, new : str):
-    f = open(__file__, 'r', encoding = "utf-8")
+def ReReplaceString(file, obj : str, new : str):
+    f = open(file, 'r', encoding = "utf-8")
 
     current = f.read()
     f.close()
@@ -17,13 +17,13 @@ def ReReplaceString(obj : str, new : str):
         
     current = current.replace(r, new)    
         
-    f = open(__file__, "w", encoding = "utf-8")    
+    f = open(file, "w", encoding = "utf-8")    
         
     f.write(current)
     f.close()    
     
-def ReReplacePerem(obj : str, new : str):
-    f = open(__file__, 'r', encoding = "utf-8")
+def ReReplacePerem(file, obj : str, new : str):
+    f = open(file, 'r', encoding = "utf-8")
     
     current = f.read()
     f.close()
@@ -33,7 +33,7 @@ def ReReplacePerem(obj : str, new : str):
     
     current = current.replace(r, new)
     
-    f = open(__file__, "w", encoding = "utf-8")
+    f = open(file, "w", encoding = "utf-8")
     
     f.write(current)
     f.close()
