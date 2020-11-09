@@ -35,7 +35,7 @@ headers = {
 
 random_num = [1, 5]
 
-_link = 'https://docs.google.com/forms/d/e/1FAIpQLSc6I2ywg_Nl_Aot3lFt1FdPnft0xS5ea62MjVpsGFe76webXQ/formResponse'
+_link = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSc9CFL6d7qKMJUzKl-FUGWONREe6y9PygPzDIVkeDSyU4-bpg/formResponse'
 
 jojo = random.choice(random_num)
 
@@ -194,6 +194,9 @@ def RaidComporator(ServerList, arg):
                         res[i['id']] = Identities.random_surnames("конечно зафиксирую") + ' ' + Identities.random_names("ладно")
                     elif l['value'] == "default":
                         res[i['id']] = SpamModules.RandomRes(100)
+                    elif "default" in l['value'] and l['value'] != 'default':
+                        per = int(l['value'].split()[1])
+                        res[i['id']] = SpamModules.RandomRes(per)
                     elif l['value'] == "gen":
                         res[i['id']] = SpamModules.Genders("помянем")
                     elif l['value'] == 'name':
@@ -241,30 +244,60 @@ def AnsSetter():
                                 
 def raid(e:int):
         
-    for i in range(250):
-        
-        RaidReqList = RaidComporator(jojo, 1)
-                        
-        r = requests.post(_link, 
-                          data = RaidReqList,
-                          headers = headers,
-                          proxies = None)                               
+    RaidReqList, i = RaidComporator(jojo, 1), 0
+                    
+    r = requests.post(_link, 
+                        data = RaidReqList,
+                        headers = headers,
+                        proxies = None)                               
                 
-        if r.status_code == 200:
-            status = "OK"
-            LogManager.info(f"{r} === {e + 1} || {i + 1} === {status}")
-        elif r.status_code == 405 or r.status_code == 404 or r.status_code == 429:
-            status = responses[r.status_code]
-            LogManager.warning(f"{r} === {e + 1} || {i + 1} === {status}")
-        elif r.status_code == 400:
-            if i != 0:
-                utils.ReReplacePerem(__file__, "RaidReqList", "RaidComporator(jojo, 1)")
-                LogManager.info(RaidReqList['emailAddress'])
+    if r.status_code == 200:
+        status = "OK"
+        LogManager.info(f"{r} === {e + 1} || {i + 1} === {status}")
+        
+        for i in range(249):
+            RaidReqList = RaidComporator(jojo, 1)
+                            
+            r = requests.post(_link, 
+                                data = RaidReqList,
+                                headers = headers,
+                                proxies = None)    
+        
+            if r.status_code == 200:
+                status = "OK"
+                LogManager.info(f"{r} === {e + 1} || {i + 1} === {status}")
+            elif r.status_code == 405 or r.status_code == 404 or r.status_code == 429 or r.status_code == 400:
+                status = responses[r.status_code]
+                LogManager.warning(f"{r} === {e + 1} || {i + 1} === {status}")
             else:
-                utils.ReReplacePerem(__file__, "RaidReqList", "RaidComporator(jojo, 0)")
-        else:
-            status = responses[r.status_code]
-            LogManager.error(f"{r} === {e + 1} || {i + 1} === {status}")
+                status = responses[r.status_code]
+                LogManager.error(f"{r} === {e + 1} || {i + 1} === {status}")
+        
+    elif r.status_code == 405 or r.status_code == 404 or r.status_code == 429:
+        status = responses[r.status_code]
+        LogManager.warning(f"{r} === {e + 1} || {i + 1} === {status}")
+    elif r.status_code == 400:
+        for i in range(249):
+            RaidReqList = RaidComporator(jojo, 0)
+                            
+            r = requests.post(_link,                                
+                                data = RaidReqList,
+                                headers = headers,
+                                proxies = None) 
+            
+            if r.status_code == 200:
+                status = "OK"
+                LogManager.info(f"{r} === {e + 1} || {i + 1} === {status}")
+            elif r.status_code == 405 or r.status_code == 404 or r.status_code == 429 or r.status_code == 400:
+                status = responses[r.status_code]
+                LogManager.warning(f"{r} === {e + 1} || {i + 1} === {status}")
+            else:
+                status = responses[r.status_code]
+                LogManager.error(f"{r} === {e + 1} || {i + 1} === {status}")
+            
+    else:
+        status = responses[r.status_code]
+        LogManager.error(f"{r} === {e + 1} || {i + 1} === {status}")
 
 @click.command()
 @click.option('--link', default = True, help = 'Show raiding link')
@@ -350,7 +383,7 @@ def start1():
     i = 123
     _ = list()
     
-    for i in range(10):
+    for i in range(30):
         thr = threading.Thread(target = raid, args = [i], daemon = True)
         thr.start()    
         _.append(thr)
