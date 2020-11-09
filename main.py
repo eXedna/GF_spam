@@ -35,7 +35,7 @@ headers = {
 
 random_num = [1, 5]
 
-_link = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSc6I2ywg_Nl_Aot3lFt1FdPnft0xS5ea62MjVpsGFe76webXQ/formResponse'
+_link = 'https://docs.google.com/forms/d/e/1FAIpQLSc6I2ywg_Nl_Aot3lFt1FdPnft0xS5ea62MjVpsGFe76webXQ/formResponse'
 
 jojo = random.choice(random_num)
 
