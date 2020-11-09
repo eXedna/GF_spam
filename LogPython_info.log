@@ -29507,6 +29507,7 @@
 [11/08/2020 03:31:06 PM] [LogPython 13200] [INFO   ] <Response [200]> === 3 || 373       OK
 [11/08/2020 03:31:06 PM] [LogPython 13200] [INFO   ] <Response [200]> === 8 || 379       OK
 [11/08/2020 03:31:06 PM] [LogPython 13200] [WARNING] Raid log out
+<<<<<<< HEAD
 [11/09/2020 03:38:13 PM] [LogPython 8900 ] [WARNING] <Response [405]> === 5 || 1 === Method Not Allowed
 [11/09/2020 03:38:13 PM] [LogPython 8900 ] [WARNING] <Response [405]> === 9 || 1 === Method Not Allowed
 [11/09/2020 03:38:13 PM] [LogPython 8900 ] [WARNING] <Response [405]> === 3 || 1 === Method Not Allowed
@@ -29586,3 +29587,181 @@
 [11/09/2020 03:38:22 PM] [LogPython 8900 ] [WARNING] <Response [405]> === 2 || 8 === Method Not Allowed
 [11/09/2020 03:38:22 PM] [LogPython 8900 ] [WARNING] <Response [405]> === 9 || 8 === Method Not Allowed[11/09/2020 03:39:11 PM] [LogPython 2764 ] [INFO   ] Link changed
 [11/09/2020 03:39:25 PM] [LogPython 5536 ] [INFO   ] writing complete
+=======
+[11/08/2020 03:47:22 PM] [LogPython 5848 ] [ERROR  ] Temp error
+[11/08/2020 03:47:23 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 4 || 1 === Method Not Allowed
+[11/08/2020 03:47:23 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 7 || 1 === Method Not Allowed
+[11/08/2020 03:47:23 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 8 || 1 === Method Not Allowed
+[11/08/2020 03:47:23 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 9 || 1 === Method Not Allowed
+[11/08/2020 03:47:23 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 1 || 1 === Method Not Allowed
+[11/08/2020 03:47:23 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 3 || 1 === Method Not Allowed
+[11/08/2020 03:47:23 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 6 || 1 === Method Not Allowed
+[11/08/2020 03:47:23 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 2 || 1 === Method Not Allowed
+[11/08/2020 03:47:23 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 10 || 1 === Method Not Allowed
+[11/08/2020 03:47:24 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 5 || 1 === Method Not Allowed
+[11/08/2020 03:47:25 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 8 || 2 === Method Not Allowed
+[11/08/2020 03:47:25 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 7 || 2 === Method Not Allowed
+[11/08/2020 03:47:25 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 4 || 2 === Method Not Allowed
+[11/08/2020 03:47:25 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 2 || 2 === Method Not Allowed
+[11/08/2020 03:47:25 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 3 || 2 === Method Not Allowed
+[11/08/2020 03:47:25 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 9 || 2 === Method Not Allowed
+[11/08/2020 03:47:25 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 10 || 2 === Method Not Allowed
+[11/08/2020 03:47:25 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 6 || 2 === Method Not Allowed
+[11/08/2020 03:47:25 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 1 || 2 === Method Not Allowed
+[11/08/2020 03:47:25 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 5 || 2 === Method Not Allowed
+[11/08/2020 03:47:26 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 8 || 3 === Method Not Allowed
+[11/08/2020 03:47:26 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 7 || 3 === Method Not Allowed
+[11/08/2020 03:47:26 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 4 || 3 === Method Not Allowed
+[11/08/2020 03:47:26 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 2 || 3 === Method Not Allowed
+[11/08/2020 03:47:26 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 3 || 3 === Method Not Allowed
+[11/08/2020 03:47:26 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 10 || 3 === Method Not Allowed
+[11/08/2020 03:47:26 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 9 || 3 === Method Not Allowed
+[11/08/2020 03:47:26 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 1 || 3 === Method Not Allowed
+[11/08/2020 03:47:26 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 5 || 3 === Method Not Allowed
+[11/08/2020 03:47:26 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 6 || 3 === Method Not Allowed
+[11/08/2020 03:47:27 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 3 || 4 === Method Not Allowed
+[11/08/2020 03:47:27 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 8 || 4 === Method Not Allowed
+[11/08/2020 03:47:27 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 2 || 4 === Method Not Allowed
+[11/08/2020 03:47:27 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 4 || 4 === Method Not Allowed
+[11/08/2020 03:47:27 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 9 || 4 === Method Not Allowed
+[11/08/2020 03:47:27 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 7 || 4 === Method Not Allowed
+[11/08/2020 03:47:27 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 5 || 4 === Method Not Allowed
+[11/08/2020 03:47:27 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 1 || 4 === Method Not Allowed
+[11/08/2020 03:47:28 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 10 || 4 === Method Not Allowed
+[11/08/2020 03:47:28 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 6 || 4 === Method Not Allowed
+[11/08/2020 03:47:28 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 8 || 5 === Method Not Allowed
+[11/08/2020 03:47:28 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 2 || 5 === Method Not Allowed
+[11/08/2020 03:47:28 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 9 || 5 === Method Not Allowed
+[11/08/2020 03:47:28 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 3 || 5 === Method Not Allowed
+[11/08/2020 03:47:29 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 4 || 5 === Method Not Allowed
+[11/08/2020 03:47:29 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 7 || 5 === Method Not Allowed
+[11/08/2020 03:47:29 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 10 || 5 === Method Not Allowed
+[11/08/2020 03:47:29 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 5 || 5 === Method Not Allowed
+[11/08/2020 03:47:29 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 1 || 5 === Method Not Allowed
+[11/08/2020 03:47:29 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 6 || 5 === Method Not Allowed
+[11/08/2020 03:47:29 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 8 || 6 === Method Not Allowed
+[11/08/2020 03:47:30 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 2 || 6 === Method Not Allowed
+[11/08/2020 03:47:30 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 4 || 6 === Method Not Allowed
+[11/08/2020 03:47:30 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 7 || 6 === Method Not Allowed
+[11/08/2020 03:47:30 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 3 || 6 === Method Not Allowed
+[11/08/2020 03:47:30 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 9 || 6 === Method Not Allowed
+[11/08/2020 03:47:30 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 5 || 6 === Method Not Allowed
+[11/08/2020 03:47:30 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 10 || 6 === Method Not Allowed
+[11/08/2020 03:47:30 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 1 || 6 === Method Not Allowed
+[11/08/2020 03:47:30 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 6 || 6 === Method Not Allowed
+[11/08/2020 03:47:31 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 8 || 7 === Method Not Allowed
+[11/08/2020 03:47:31 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 2 || 7 === Method Not Allowed
+[11/08/2020 03:47:31 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 3 || 7 === Method Not Allowed
+[11/08/2020 03:47:31 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 4 || 7 === Method Not Allowed
+[11/08/2020 03:47:31 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 7 || 7 === Method Not Allowed
+[11/08/2020 03:47:31 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 9 || 7 === Method Not Allowed
+[11/08/2020 03:47:31 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 10 || 7 === Method Not Allowed
+[11/08/2020 03:47:31 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 6 || 7 === Method Not Allowed
+[11/08/2020 03:47:31 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 5 || 7 === Method Not Allowed
+[11/08/2020 03:47:32 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 1 || 7 === Method Not Allowed
+[11/08/2020 03:47:32 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 2 || 8 === Method Not Allowed
+[11/08/2020 03:47:32 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 8 || 8 === Method Not Allowed
+[11/08/2020 03:47:32 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 3 || 8 === Method Not Allowed
+[11/08/2020 03:47:32 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 4 || 8 === Method Not Allowed
+[11/08/2020 03:47:32 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 7 || 8 === Method Not Allowed
+[11/08/2020 03:47:32 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 9 || 8 === Method Not Allowed
+[11/08/2020 03:47:33 PM] [LogPython 5848 ] [WARNING] <Response [405]> === 6 || 8 === Method Not Allowed
+[11/08/2020 03:47:33 PM] [LogPython 5848 ] [WARNING] [11/08/2020 03:47:44 PM] [LogPython 10600] [ERROR  ] Temp error
+[11/09/2020 10:19:58 AM] [LogPython 3936 ] [ERROR  ] Temp error
+[11/09/2020 10:20:06 AM] [LogPython 3936 ] [INFO   ] Link changed
+[11/09/2020 10:20:13 AM] [LogPython 11500] [ERROR  ] Temp error
+[11/09/2020 10:20:14 AM] [LogPython 11500] [INFO   ] writing complete
+[11/09/2020 10:20:17 AM] [LogPython 1612 ] [ERROR  ] Temp error
+[11/09/2020 10:20:24 AM] [LogPython 13644] [ERROR  ] Temp error
+[11/09/2020 10:20:34 AM] [LogPython 8228 ] [ERROR  ] Temp error
+[11/09/2020 10:21:50 AM] [LogPython 5244 ] [ERROR  ] Temp error
+[11/09/2020 10:21:50 AM] [LogPython 5244 ] [INFO   ] writing complete
+[11/09/2020 10:22:01 AM] [LogPython 6944 ] [ERROR  ] Temp error
+[11/09/2020 11:38:19 AM] [LogPython 14328] [WARNING] Raid log out
+[11/09/2020 12:16:10 PM] [LogPython 9732 ] [INFO   ] writing complete
+[11/09/2020 12:17:02 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 9 || 1 === Bad Request
+[11/09/2020 12:17:02 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 10 || 1 === Bad Request
+[11/09/2020 12:17:02 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 4 || 1 === Bad Request
+[11/09/2020 12:17:02 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 6 || 1 === Bad Request
+[11/09/2020 12:17:02 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 1 || 1 === Bad Request
+[11/09/2020 12:17:02 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 2 || 1 === Bad Request
+[11/09/2020 12:17:02 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 5 || 1 === Bad Request
+[11/09/2020 12:17:02 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 8 || 1 === Bad Request
+[11/09/2020 12:17:02 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 7 || 1 === Bad Request
+[11/09/2020 12:17:03 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 3 || 1 === Bad Request
+[11/09/2020 12:17:08 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 9 || 2 === Bad Request
+[11/09/2020 12:17:08 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 10 || 2 === Bad Request
+[11/09/2020 12:17:09 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 1 || 2 === Bad Request
+[11/09/2020 12:17:09 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 4 || 2 === Bad Request
+[11/09/2020 12:17:09 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 2 || 2 === Bad Request
+[11/09/2020 12:17:09 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 5 || 2 === Bad Request
+[11/09/2020 12:17:09 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 6 || 2 === Bad Request
+[11/09/2020 12:17:09 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 7 || 2 === Bad Request
+[11/09/2020 12:17:09 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 3 || 2 === Bad Request
+[11/09/2020 12:17:10 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 8 || 2 === Bad Request
+[11/09/2020 12:17:12 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 9 || 3 === Bad Request
+[11/09/2020 12:17:12 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 10 || 3 === Bad Request
+[11/09/2020 12:17:14 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 1 || 3 === Bad Request
+[11/09/2020 12:17:15 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 4 || 3 === Bad Request
+[11/09/2020 12:17:15 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 6 || 3 === Bad Request
+[11/09/2020 12:17:15 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 2 || 3 === Bad Request
+[11/09/2020 12:17:16 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 5 || 3 === Bad Request
+[11/09/2020 12:17:16 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 7 || 3 === Bad Request
+[11/09/2020 12:17:16 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 3 || 3 === Bad Request
+[11/09/2020 12:17:16 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 8 || 3 === Bad Request
+[11/09/2020 12:17:18 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 9 || 4 === Bad Request
+[11/09/2020 12:17:18 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 10 || 4 === Bad Request
+[11/09/2020 12:17:19 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 1 || 4 === Bad Request
+[11/09/2020 12:17:22 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 4 || 4 === Bad Request
+[11/09/2020 12:17:22 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 6 || 4 === Bad Request
+[11/09/2020 12:17:22 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 5 || 4 === Bad Request
+[11/09/2020 12:17:22 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 2 || 4 === Bad Request
+[11/09/2020 12:17:23 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 7 || 4 === Bad Request
+[11/09/2020 12:17:23 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 3 || 4 === Bad Request
+[11/09/2020 12:17:23 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 8 || 4 === Bad Request
+[11/09/2020 12:17:24 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 9 || 5 === Bad Request
+[11/09/2020 12:17:25 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 10 || 5 === Bad Request
+[11/09/2020 12:17:25 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 1 || 5 === Bad Request
+[11/09/2020 12:17:28 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 4 || 5 === Bad Request
+[11/09/2020 12:17:28 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 6 || 5 === Bad Request
+[11/09/2020 12:17:29 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 2 || 5 === Bad Request
+[11/09/2020 12:17:29 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 5 || 5 === Bad Request
+[11/09/2020 12:17:29 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 3 || 5 === Bad Request
+[11/09/2020 12:17:29 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 7 || 5 === Bad Request
+[11/09/2020 12:17:30 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 8 || 5 === Bad Request
+[11/09/2020 12:17:31 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 10 || 6 === Bad Request
+[11/09/2020 12:17:31 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 9 || 6 === Bad Request
+[11/09/2020 12:17:31 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 1 || 6 === Bad Request
+[11/09/2020 12:17:34 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 6 || 6 === Bad Request
+[11/09/2020 12:17:34 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 4 || 6 === Bad Request
+[11/09/2020 12:17:35 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 5 || 6 === Bad Request
+[11/09/2020 12:17:35 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 2 || 6 === Bad Request
+[11/09/2020 12:17:35 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 3 || 6 === Bad Request
+[11/09/2020 12:17:36 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 7 || 6 === Bad Request
+[11/09/2020 12:17:36 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 8 || 6 === Bad Request
+[11/09/2020 12:17:37 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 10 || 7 === Bad Request
+[11/09/2020 12:17:37 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 9 || 7 === Bad Request
+[11/09/2020 12:17:37 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 1 || 7 === Bad Request
+[11/09/2020 12:17:40 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 6 || 7 === Bad Request
+[11/09/2020 12:17:40 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 4 || 7 === Bad Request
+[11/09/2020 12:17:42 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 5 || 7 === Bad Request
+[11/09/2020 12:17:42 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 2 || 7 === Bad Request
+[11/09/2020 12:17:42 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 3 || 7 === Bad Request
+[11/09/2020 12:17:42 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 7 || 7 === Bad Request
+[11/09/2020 12:17:43 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 8 || 7 === Bad Request
+[11/09/2020 12:17:44 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 10 || 8 === Bad Request
+[11/09/2020 12:17:44 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 9 || 8 === Bad Request
+[11/09/2020 12:17:44 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 1 || 8 === Bad Request
+[11/09/2020 12:17:47 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 6 || 8 === Bad Request
+[11/09/2020 12:17:47 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 4 || 8 === Bad Request
+[11/09/2020 12:17:49 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 2 || 8 === Bad Request
+[11/09/2020 12:17:49 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 5 || 8 === Bad Request
+[11/09/2020 12:17:49 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 3 || 8 === Bad Request
+[11/09/2020 12:17:50 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 7 || 8 === Bad Request
+[11/09/2020 12:17:50 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 8 || 8 === Bad Request
+[11/09/2020 12:17:51 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 10 || 9 === Bad Request
+[11/09/2020 12:17:51 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 9 || 9 === Bad Request
+[11/09/2020 12:17:51 PM] [LogPython 6516 ] [ERROR  ] <Response [400]> === 1 || 9 === Bad Request
+[11/09/2020 12:17:53 PM] [LogPython 6516 ] [ERROR  ] [11/09/2020 12:18:16 PM] [LogPython 11128] [INFO   ] writing complete
+[11/09/2020 12:32:49 PM] [LogPython 13384] [INFO   ] writing complete
+>>>>>>> 040bada8a631bd1c727a29dbd8ebd87c457faaa1
