@@ -224,9 +224,7 @@ def AnsSetter():
 def raid(e:int):
         
     RaidReqList, i = RaidComporator(jojo, 1), 0
-    
-    print(RaidReqList)
-                    
+                        
     r = requests.post(_link, 
                         data = RaidReqList,
                         headers = headers,
