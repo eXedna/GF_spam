@@ -1,8 +1,13 @@
-from ShG_rand import perem
+try:
+    from ShG_rand import Identities
+    from ShG_rand import perem
+except:
+    from perem import *
+    import Identities
+
 from bs4 import BeautifulSoup
 import requests
 import random
-from ShG_rand import Identities
 
 def Genders(*args):
     res = perem.genders
@@ -34,7 +39,7 @@ def RandomWords(*args):
     spl1 = "<div class=words>"
     spl2 = "</table>"
     spl3 = "<table cellspacing=0 cellpadding=0>"
-    c = requests.post(url)
+    c = requests.get(url)
     text = c.text
     list_ = []
     text = text.split(spl1)[1]
@@ -44,7 +49,7 @@ def RandomWords(*args):
     for i in text.split("\n"):
         if len(i) < 3:
             continue
-        elif "тумбочка" in i:
+        elif "алый" in i:
             break
 
         list_.append(i.strip().split(">")[2].split("<")[0] )          
@@ -59,12 +64,6 @@ def RandomRes(qan = 5):
     
     for i in Identities.AnimeNames():
         gl_list.append(i)
-        
-    for k in Genders():
-        gl_list.append(k)
-
-    for l in RandomStations():
-        gl_list.append(l)
 
     for j in RandomWords():
         gl_list.append(j)

