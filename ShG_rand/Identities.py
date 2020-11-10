@@ -4,6 +4,7 @@ except:
     import perem
 
 import random
+import json
 
 import requests
 from bs4 import BeautifulSoup
@@ -110,6 +111,36 @@ def random_eng_names(*args):
     else:
         return _out
 
+def PumNames(*args):
+    f = open("PumNames.txt", "r", encoding = "utf-8").readline()
+    
+    resp = json.loads(f)
+    
+    if len(args) != 0:
+        return random.choice(resp)
+    else:
+        return resp
+    
+def PumSurnames(*args):
+    f = open("PumSurames.txt", "r", encoding = "utf-8").readline()
+    
+    resp = json.loads(f)
+    
+    if len(args) != 0:
+        return random.choice(resp)
+    else:
+        return resp
+    
+def PumPP(*args):
+    f = open("PumPP.txt", "r", encoding = "utf-8").readline()
+    
+    resp = json.loads(f)
+    
+    if len(args) != 0:
+        return random.choice(resp)
+    else:
+        return resp
+
 def FIO():
     fio = random_surnames("...") + " "\
         + random_names("...") + " "\
@@ -125,4 +156,4 @@ def AnimeNames(*args):
     else:  
         return res
 
-random_eng_names()
+PumNames()
